@@ -4,7 +4,7 @@
 
 ## Usage
 
-A build copy of this code is running at <https://acctoolkit.bigc.industries> which anyone is free to use.
+A built copy of this code is running at <https://acctoolkit.bigc.industries> which anyone is free to use.
 
 ---
 
