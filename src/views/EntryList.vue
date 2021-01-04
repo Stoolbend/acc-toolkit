@@ -253,13 +253,13 @@
                         type="number"
                         min="0"
                         max="100"
-                        :value="data.item.ballastkg" 
-                        @change="onPropertyChange(data.item, 'ballastkg', $event, true)" />
+                        :value="data.item.ballastKg" 
+                        @change="onPropertyChange(data.item, 'ballastKg', $event, true)" />
                       <b-input-group-append>
                         <b-button 
-                          v-if="data.item.ballastkg"
+                          v-if="data.item.ballastKg"
                           variant="secondary"
-                          @click="onPropertyChange(data.item, 'ballastkg', null, true)">
+                          @click="onPropertyChange(data.item, 'ballastKg', null, true)">
                           Remove
                         </b-button>
                       </b-input-group-append>
@@ -423,7 +423,7 @@ export default {
         'car',
         {
           key: 'actions',
-          label: null
+          label: ''
         }
       ]
     }
@@ -445,6 +445,10 @@ export default {
       }
       return totalDrivers
     }
+  },
+  mounted () {
+    // Setting from mixins/cars.js to enable the -1 "No forced car" option.
+    this.carSelectSettings.showNoCar = true
   },
   methods: {
     onNew () {
@@ -485,7 +489,7 @@ export default {
         value = -1 
       if (key === 'defaultGridPosition' && (value === '' || value === '0' || value < 1))
         value = null
-      if (key === 'ballastkg' && (value === '' || value < 0 || value > 100))
+      if (key === 'ballastKg' && (value === '' || value < 0 || value > 100))
         value = null
       if (key === 'restrictor' && (value === '' || value < 0 || value > 20))
         value = null

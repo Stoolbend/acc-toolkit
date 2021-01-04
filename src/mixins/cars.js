@@ -33,6 +33,11 @@ export default {
           year: 2015,
           class: 'gt3'
         },
+        2: {
+          name: 'Ferrari 488 GT3',
+          year: 2018,
+          class: 'gt3'
+        },
         3: {
           name: 'Audi R8 LMS',
           year: 2015,
@@ -141,68 +146,84 @@ export default {
         24: {
           name: 'Ferrari 488 GT3 Evo',
           year: 2020,
-          class: 'gt3'
+          class: 'gt3',
+          dlc: '2020 GT World Challenge Pack'
         },
         25: {
           name: 'Mercedes-AMG GT3',
           year: 2020,
-          class: 'gt3'
+          class: 'gt3',
+          dlc: '2020 GT World Challenge Pack'
         },
         50: {
           name: 'Alpine A110 GT4',
           year: 2018,
-          class: 'gt4'
+          class: 'gt4',
+          dlc: 'GT4 Pack'
         },
         51: {
           name: 'Aston Martin Vantage GT4',
           year: 2018,
-          class: 'gt4'
+          class: 'gt4',
+          dlc: 'GT4 Pack'
         },
         52: {
           name: 'Audi R8 LMS GT4',
           year: 2018,
-          class: 'gt4'
+          class: 'gt4',
+          dlc: 'GT4 Pack'
         },
         53: {
           name: 'BMW M4 GT4',
           year: 2018,
-          class: 'gt4'
+          class: 'gt4',
+          dlc: 'GT4 Pack'
         },
         55: {
           name: 'Chevrolet Camaro GT4',
           year: 2017,
-          class: 'gt4'
+          class: 'gt4',
+          dlc: 'GT4 Pack'
         },
         56: {
           name: 'Ginetta G55 GT4',
           year: 2012,
-          class: 'gt4'
+          class: 'gt4',
+          dlc: 'GT4 Pack'
         },
         57: {
           name: 'KTM X-Bow GT4',
           year: 2016,
-          class: 'gt4'
+          class: 'gt4',
+          dlc: 'GT4 Pack'
         },
         58: {
           name: 'Maserati MC GT4',
           year: 2016,
-          class: 'gt4'
+          class: 'gt4',
+          dlc: 'GT4 Pack'
         },
         59: {
           name: 'McLaren 570S GT4',
           year: 2016,
-          class: 'gt4'
+          class: 'gt4',
+          dlc: 'GT4 Pack'
         },
         60: {
           name: 'Mercedes AMG GT4',
           year: 2016,
-          class: 'gt4'
+          class: 'gt4',
+          dlc: 'GT4 Pack'
         },
         61: {
           name: 'Porsche 718 Cayman GT4 Clubsport',
           year: 2019,
-          class: 'gt4'
+          class: 'gt4',
+          dlc: 'GT4 Pack'
         }
+      },
+      carSelectSettings: {
+        showNoCar: false
       }
     }
   },
@@ -212,6 +233,8 @@ export default {
       let options = []
       if (this.carData) {
         for (let key in this.carData) {
+          if (!this.carSelectSettings.showNoCar && key === '-1')
+            continue
           if (!this.carData[key].class) {
             options.push({
               value: parseInt(key),
