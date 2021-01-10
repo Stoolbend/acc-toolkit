@@ -14,9 +14,11 @@
         <b-nav-item :to="{ name: 'EntryList' }">
           <div class="d-flex flex-row align-items-center">
             Entry List Editor
-            <b-icon
-              icon="person-lines-fill"
-              class="ml-1"/>
+          </div>
+        </b-nav-item>
+        <b-nav-item :to="{ name: 'Bop' }">
+          <div class="d-flex flex-row align-items-center">
+            BoP Editor
           </div>
         </b-nav-item>
       </b-navbar-nav>

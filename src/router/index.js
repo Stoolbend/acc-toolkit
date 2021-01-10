@@ -30,6 +30,11 @@ const routes = [
     path: '/EntryList',
     name: 'EntryList',
     component: () => import(/* webpackChunkName: "entryList" */ '../views/EntryList.vue')
+  },
+  {
+    path: '/Bop',
+    name: 'Bop',
+    component: () => import(/* webpackChunkName: "bop" */ '../views/Bop.vue')
   }
 ]
 
