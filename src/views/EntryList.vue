@@ -85,12 +85,11 @@
                       </b-input-group>
                     </div>
                     <div class="d-flex flex-row justify-content-between">
-                      <div>
+                      <b-button-group>
                         <b-button
                           v-if="index > 0"
                           variant="primary"
                           size="sm"
-                          class="mr-1"
                           @click="swapDriver(index, index - 1, data.item)">
                           <b-icon icon="arrow-up"/>
                         </b-button>
@@ -101,7 +100,7 @@
                           @click="swapDriver(index, index + 1, data.item)">
                           <b-icon icon="arrow-down"/>
                         </b-button>
-                      </div>
+                      </b-button-group>
                       <b-button
                         variant="danger"
                         size="sm"
