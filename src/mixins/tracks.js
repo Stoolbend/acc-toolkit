@@ -70,6 +70,11 @@ export default {
           name: 'Brands Hatch Circuit',
           year: 2019
         },
+        'donington_2019': {
+          name: 'Donington Park',
+          year: 2019,
+          dlc: 'British GT Pack'
+        },
         'kyalami_2019': {
           name: 'Kyalami Grand Prix Circuit',
           year: 2019,
@@ -101,6 +106,11 @@ export default {
           name: 'Nurburgring',
           year: 2019
         },
+        'oulton_park_2019': {
+          name: 'Oulton Park',
+          year: 2019,
+          dlc: 'British GT Pack'
+        },
         'paul_ricard_2019': {
           name: 'Circuit - Paul Ricard',
           year: 2019
@@ -108,6 +118,11 @@ export default {
         'silverstone_2019': {
           name: 'Silverstone',
           year: 2019
+        },
+        'snetterton_2019': {
+          name: 'Snetterton Circuit',
+          year: 2019,
+          dlc: 'British GT Pack'
         },
         'spa_2019': {
           name: 'Circuit de Spa-Francorchamps',
