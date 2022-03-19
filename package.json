@@ -16,6 +16,7 @@
   "dependencies": {
     "bootstrap-vue": "^2.21.2",
     "core-js": "^3.6.5",
+    "downloadjs": "^1.4.7",
     "lodash.clonedeep": "^4.5.0",
     "lodash.isequal": "^4.5.0",
     "object-hash": "^2.1.1",

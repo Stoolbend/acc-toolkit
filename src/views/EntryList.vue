@@ -1,5 +1,5 @@
 <template>
-  <div class="row m-1">
+  <div class="row m-1" @dragover.prevent @drop.prevent @drop="dragFile">
     <div class="col-12">
       <div
         v-if="entryList" 
@@ -381,6 +381,14 @@
           New entry list
         </b-button>
       </div>
+      <div
+        v-if="!!this.entryList"
+        class="d-flex flex-row justify-content-center mb-1"
+      >
+        <b-button variant="secondary" @click="downloadEntryList">
+          Download Entry List
+        </b-button>
+      </div>
     </div>
   </div>
 </template>
@@ -407,6 +415,7 @@ import cars from '../mixins/cars'
 import driverCategories from '../mixins/driverCategories'
 import hash from 'object-hash'
 import isEqual from 'lodash.isequal'
+import download from 'downloadjs'
 
 export default {
   name: 'EntryList',
@@ -550,7 +559,11 @@ export default {
       // Update the existing entry list
       this.entryList = newList
     },
-    deleteEntry (entry) {
+    downloadEntryList() {
+      let data = Buffer.from(this.entryListText, "utf16le");
+      download(data, "entryList.json", "application/json");
+    },
+    deleteEntry(entry) {
       // Clone existing entry list
       let newList = cloneDeep(this.entryList)
       // Find entry we want to modify
