@@ -373,7 +373,7 @@
         v-model="entryListText" 
         rows="10"
         class="mb-2"
-        placeholder="Paste contents of entrylist.json here..." />
+        placeholder="Drag & Drop your entrylist.json or paste its contents here..." />
       <div class="d-flex flex-row justify-content-center mb-1">
         <b-button
           variant="secondary"
@@ -459,7 +459,24 @@ export default {
     this.carSelectSettings.showNoCar = true
   },
   methods: {
-    onNew () {
+    dragFile(e) {
+      let files = e.dataTransfer.files;
+      let file = files[0];
+      const reader = new FileReader();
+
+      let result = null;
+
+      reader.addEventListener("load", () => {
+      result = reader.result;
+        this.entryList=JSON.parse(result);
+      }, false);
+
+      if (file) {
+        reader.readAsText(file, "UTF-16LE");
+      }
+
+    },
+    onNew() {
       this.entryList = {
         entries: [],
         configVersion: 1,
