@@ -175,15 +175,20 @@
                 @change="onUpdate()"
                 v-model="file.formationLapType"
               >
-                <b-form-select-option value="3"
+                <b-form-select-option :value="3"
                   >default formation lap with position control and UI
                 </b-form-select-option>
-                <b-form-select-option value="0"
+                <b-form-select-option :value="0"
                   >Old Limiter Lap</b-form-select-option
                 >
-                <b-form-select-option value="1"
+                <b-form-select-option :value="1"
                   >free (replaces /manual start), only usable for private
                   servers</b-form-select-option
+                >
+                 <b-form-select-option :value="4"
+                  >one free formation lap + 1 ghosted cars lap</b-form-select-option
+                > <b-form-select-option :value="5"
+                  >short formation lap with position control and UI + 1 ghosted cars lap</b-form-select-option
                 >
               </b-form-select>
             </b-td>
@@ -192,10 +197,10 @@
                 @change="onUpdate()"
                 v-model="file.ignorePrematureDisconnects"
               >
-                <b-form-select-option value="1"
+                <b-form-select-option :value="1"
                   >default: less arbitrary connections lost
                 </b-form-select-option>
-                <b-form-select-option value="0"
+                <b-form-select-option :value="0"
                   >more timeouts, but strict disconnection of anyone who
 appears inactive for 5 seconds. Can be useful on unsupported
 platforms where TCP sockets act differently</b-form-select-option

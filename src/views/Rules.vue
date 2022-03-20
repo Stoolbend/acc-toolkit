@@ -19,10 +19,10 @@
                 @change="onUpdate()"
                 v-model="file.qualifyStandingType"
               >
-                <b-form-select-option value="1"
+                <b-form-select-option :value="1"
                   >fastest lap</b-form-select-option
                 >
-                <b-form-select-option value="2">
+                <b-form-select-option :value="2">
                   average lap (running Endurance mode for multiple Q sessions) .
                   Use 1, averaging Qualy is not yet officially
                   supported.</b-form-select-option
