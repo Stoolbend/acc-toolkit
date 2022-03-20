@@ -633,7 +633,7 @@ export default {
     },
     downloadEntryList() {
       let data = Buffer.from(this.entryListText, "utf16le");
-      download(data, "entryList.json", "application/json");
+      download(data, "entrylist.json", "application/json");
     },
     deleteEntry(entry) {
       // Clone existing entry list
