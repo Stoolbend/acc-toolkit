@@ -347,6 +347,10 @@
             @click="onAdd">
             Add car
           </b-button>
+            <b-button  v-b-modal.reverse variant="warning">
+            Reverse Grid
+          </b-button>
+          <b-modal @ok="reverseGrid()" id="reverse" title="Reverse the Grid">Do You want to reverse the grid based on the default grid position? This will only work if there are no duplicates.</b-modal>
         </div>
       </div>
       <div
@@ -475,6 +479,38 @@ export default {
         reader.readAsText(file, "UTF-16LE");
       }
 
+    },reverseGrid(){
+
+        if (!this.hasDuplicateGridPosition()){
+        let entries = this.entryList.entries;
+        let gridPositions = [];
+        entries.forEach(entry => gridPositions.push(entry.defaultGridPosition))
+        entries.sort(function(a,b){
+          return b.defaultGridPosition - a.defaultGridPosition;
+        })
+
+        gridPositions.sort(function(a,b){
+          return a-b
+        });
+
+        entries.forEach((entry, index)=>{
+          entry.defaultGridPosition = gridPositions[index];
+        })
+
+        this.entryList.entries = entries;
+
+        }
+    },
+    hasDuplicateGridPosition(){
+      let entries = this.entryList.entries;
+      let result = false;
+      entries.forEach(currentElement => {
+        entries.forEach(element=>{
+          if (element.defaultGridPosition == currentElement.defaultGridPosition && element!=currentElement)
+          result = true;
+        })
+      });
+      return result;
     },
     onNew() {
       this.entryList = {
