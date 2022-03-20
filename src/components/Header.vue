@@ -20,6 +20,10 @@
           <div class="d-flex flex-row align-items-center">
             BoP Editor
           </div>
+        </b-nav-item> <b-nav-item :to="{ name: 'Event' }">
+          <div class="d-flex flex-row align-items-center">
+            Event Editor
+          </div>
         </b-nav-item>
       </b-navbar-nav>
 
