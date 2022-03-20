@@ -9,6 +9,10 @@
           bordered
           :fields="fields"
           :items="entries">
+          <template #head(car) >
+            <b-row class="col px-md-5"> Car
+            <b-checkbox class="font-weight-lighter col px-md-5" v-model="overrideDriverInfoLocked" @input="overrideAllDriverInfo">Lock override driver info on</b-checkbox>
+          </b-row></template>
           <template #cell(drivers)="data">
             <template v-if="data.item.drivers.length < 1">
               <div class="d-flex flex-column align-items-center w-100">
@@ -216,7 +220,8 @@
                       </small>
                     </div>
                     <b-checkbox
-                      v-model="data.item.overrideDriverInfo" 
+                      v-model="data.item.overrideDriverInfo"
+                      :disabled="overrideDriverInfoLocked? true: false"
                       value="1"
                       unchecked-value="0"
                       @change="onPropertyChange(data.item, 'overrideDriverInfo', $event, true)" />
@@ -426,6 +431,7 @@ export default {
   mixins: [ cars, driverCategories ],
   data () {
     return {
+      overrideDriverInfoLocked: false,
       entryList: null,
       entryListText: null,
       jsonError: null,
@@ -544,6 +550,17 @@ export default {
       newList.entries.push(newCar)
       this.entryList = newList
     },
+    overrideAllDriverInfo(){
+      if (!this.overrideDriverInfoLocked)
+      return;
+      this.entryList.entries.forEach(entry =>{
+        entry.overrideDriverInfo=1;
+      })
+      let newList = cloneDeep(this.entryList)
+      this.entryList = newList
+
+
+    },
     onPropertyChange (entry, key, value, isInt = false) {
       // Before processing, apply some quick field validation
       if (key === 'raceNumber' && (value === '' || value === '0' || value < -1 || value > 998))
@@ -554,7 +571,9 @@ export default {
         value = null
       if (key === 'restrictor' && (value === '' || value < 0 || value > 20))
         value = null
-
+      if (key === 'overrideDriverInfo' && this.overrideDriverInfoLocked)
+      return;
+      
       // Clone existing entry list
       let newList = cloneDeep(this.entryList)
       // Find entry we want to modify
