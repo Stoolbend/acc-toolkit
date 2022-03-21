@@ -62,130 +62,42 @@ export default {
           name: 'Circuit Park Zandvoort',
           year: 2018
         },
-        'barcelona_2019': {
-          name: 'Circuit de Barcelona - Catalunya',
-          year: 2019
-        },
-        'brands_hatch_2019': {
-          name: 'Brands Hatch Circuit',
-          year: 2019
-        },
-        'donington_2019': {
+        'donington': {
           name: 'Donington Park',
           year: 2019,
           dlc: 'British GT Pack'
         },
-        'kyalami_2019': {
+        'kyalami': {
           name: 'Kyalami Grand Prix Circuit',
           year: 2019,
           dlc: 'Intercontinental GT Pack'
         },
-        'laguna_seca_2019': {
+        'laguna': {
           name: 'WeatherTech Raceway Laguna Seca',
           year: 2019,
           dlc: 'Intercontinental GT Pack'
         },
-        'hungaroring_2019': {
-          name: 'Hungaroring Circuit',
-          year: 2019
-        },
-        'misano_2019': {
-          name: 'Misano World Circuit',
-          year: 2019
-        },
-        'monza_2019': {
-          name: 'Autodromo Nazionale Monza',
-          year: 2019
-        },
-        'mount_panorama_2019': {
+        'mount_panorama': {
           name: 'Bathurst Mount Panorama Circuit',
           year: 2019,
           dlc: 'Intercontinental GT Pack'
         },
-        'nurburgring_2019': {
-          name: 'Nurburgring',
-          year: 2019
-        },
-        'oulton_park_2019': {
+        'oulton_park': {
           name: 'Oulton Park',
           year: 2019,
           dlc: 'British GT Pack'
         },
-        'paul_ricard_2019': {
-          name: 'Circuit - Paul Ricard',
-          year: 2019
-        },
-        'silverstone_2019': {
-          name: 'Silverstone',
-          year: 2019
-        },
-        'snetterton_2019': {
+        'snetterton': {
           name: 'Snetterton Circuit',
           year: 2019,
           dlc: 'British GT Pack'
         },
-        'spa_2019': {
-          name: 'Circuit de Spa-Francorchamps',
-          year: 2019
-        },
-        'suzuka_2019': {
+        'suzuka': {
           name: 'Suzuka Circuit',
           year: 2019,
           dlc: 'Intercontinental GT Pack'
         },
-        'zolder_2019': {
-          name: 'Circuit Zolder',
-          year: 2019
-        },
-        'zandvoort_2019': {
-          name: 'Circuit Park Zandvoort',
-          year: 2019
-        },
-        'barcelona_2020': {
-          name: 'Circuit de Barcelona - Catalunya',
-          year: 2020
-        },
-        'brands_hatch_2020': {
-          name: 'Brands Hatch Circuit',
-          year: 2020
-        },
-        'hungaroring_2020': {
-          name: 'Hungaroring Circuit',
-          year: 2020
-        },
-        'misano_2020': {
-          name: 'Misano',
-          year: 2020
-        },
-        'monza_2020': {
-          name: 'Autodromo Nazionale Monza',
-          year: 2020
-        },
-        'nurburgring_2020': {
-          name: 'Nurburgring',
-          year: 2020
-        },
-        'paul_ricard_2020': {
-          name: 'Circuit - Paul Ricard',
-          year: 2020
-        },
-        'silverstone_2020': {
-          name: 'Silverstone',
-          year: 2020
-        },
-        'spa_2020': {
-          name: 'Circuit de Spa-Francorchamps',
-          year: 2020
-        },
-        'zolder_2020': {
-          name: 'Circuit Zolder',
-          year: 2020
-        },
-        'zandvoort_2020': {
-          name: 'Circuit Park Zandvoort',
-          year: 2020
-        },
-        'imola_2020': {
+        'imola': {
           name: 'Autodromo Enzo e Dino Ferrari - Imola',
           year: 2020,
           dlc: '2020 GT World Challenge Pack'

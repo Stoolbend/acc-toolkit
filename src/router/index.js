@@ -35,8 +35,26 @@ const routes = [
     path: '/Bop',
     name: 'Bop',
     component: () => import(/* webpackChunkName: "bop" */ '../views/Bop.vue')
-  }
-]
+  },
+  {
+    path: "/Event",
+    name: "Event",
+    component: () =>
+      import(/* webpackChunkName: "event" */ "../views/Event.vue"),
+  },
+  {
+    path: "/Rules",
+    name: "Rules",
+    component: () =>
+      import(/* webpackChunkName: "Rules" */ "../views/Rules.vue"),
+  },
+  {
+    path: "/Settings",
+    name: "Settings",
+    component: () =>
+      import(/* webpackChunkName: "Settings" */ "../views/Settings.vue"),
+  },
+];
 
 const router = new VueRouter({
   routes

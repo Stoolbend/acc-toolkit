@@ -1,5 +1,5 @@
 <template>
-  <div class="row m-1">
+  <div class="row m-1" @dragover.prevent @drop.prevent @drop="dragFile">
     <div class="col-12">
       <div
         v-if="file" 
@@ -171,12 +171,20 @@
         v-model="fileText" 
         rows="10"
         class="mb-2"
-        placeholder="Paste contents of bop.json here..." />
+        placeholder="Drag & Drop your bop.json or paste its contents here..." />
       <div class="d-flex flex-row justify-content-center mb-1">
         <b-button
           variant="secondary"
           @click="onNew">
           New BoP list
+        </b-button>
+      </div>
+       <div
+        v-if="!!this.file"
+        class="d-flex flex-row justify-content-center mb-1"
+      >
+        <b-button variant="secondary" @click="downloadFile">
+          Download File
         </b-button>
       </div>
     </div>
@@ -204,6 +212,8 @@ import cloneDeep from 'lodash.clonedeep'
 import cars from '../mixins/cars'
 import isEqual from 'lodash.isequal'
 import tracks from '../mixins/tracks'
+import download from 'downloadjs'
+
 
 export default {
   name: 'Bop',
@@ -232,6 +242,27 @@ export default {
     }
   },
   methods: {
+    downloadFile() {
+      let data = Buffer.from(this.fileText, "utf16le");
+      download(data, "bop.json", "application/json");
+    },
+    dragFile(e) {
+      let files = e.dataTransfer.files;
+      let file = files[0];
+      const reader = new FileReader();
+
+      let result = null;
+
+      reader.addEventListener("load", () => {
+      result = reader.result;
+        this.file=JSON.parse(result);
+      }, false);
+
+      if (file) {
+        reader.readAsText(file, "UTF-16LE");
+      }
+
+    },
     onNew () {
       this.file = {
         entries: []

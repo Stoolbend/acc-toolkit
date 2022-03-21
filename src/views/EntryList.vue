@@ -1,5 +1,5 @@
 <template>
-  <div class="row m-1">
+  <div class="row m-1" @dragover.prevent @drop.prevent @drop="dragFile">
     <div class="col-12">
       <div
         v-if="entryList" 
@@ -9,6 +9,10 @@
           bordered
           :fields="fields"
           :items="entries">
+          <template #head(car) >
+            <b-row class="col px-md-5"> Car
+            <b-checkbox class="font-weight-lighter col px-md-5" v-model="overrideDriverInfoLocked" @input="overrideAllDriverInfo">Lock override driver info on</b-checkbox>
+          </b-row></template>
           <template #cell(drivers)="data">
             <template v-if="data.item.drivers.length < 1">
               <div class="d-flex flex-column align-items-center w-100">
@@ -216,7 +220,8 @@
                       </small>
                     </div>
                     <b-checkbox
-                      v-model="data.item.overrideDriverInfo" 
+                      v-model="data.item.overrideDriverInfo"
+                      :disabled="overrideDriverInfoLocked? true: false"
                       value="1"
                       unchecked-value="0"
                       @change="onPropertyChange(data.item, 'overrideDriverInfo', $event, true)" />
@@ -347,6 +352,10 @@
             @click="onAdd">
             Add car
           </b-button>
+            <b-button  v-b-modal.reverse variant="warning">
+            Reverse Grid
+          </b-button>
+          <b-modal @ok="reverseGrid()" id="reverse" title="Reverse the Grid">Do You want to reverse the grid based on the default grid position? This will only work if there are no duplicates.</b-modal>
         </div>
       </div>
       <div
@@ -373,12 +382,20 @@
         v-model="entryListText" 
         rows="10"
         class="mb-2"
-        placeholder="Paste contents of entrylist.json here..." />
+        placeholder="Drag & Drop your entrylist.json or paste its contents here..." />
       <div class="d-flex flex-row justify-content-center mb-1">
         <b-button
           variant="secondary"
           @click="onNew">
           New entry list
+        </b-button>
+      </div>
+      <div
+        v-if="!!this.entryList"
+        class="d-flex flex-row justify-content-center mb-1"
+      >
+        <b-button variant="secondary" @click="downloadEntryList">
+          Download Entry List
         </b-button>
       </div>
     </div>
@@ -407,12 +424,14 @@ import cars from '../mixins/cars'
 import driverCategories from '../mixins/driverCategories'
 import hash from 'object-hash'
 import isEqual from 'lodash.isequal'
+import download from 'downloadjs'
 
 export default {
   name: 'EntryList',
   mixins: [ cars, driverCategories ],
   data () {
     return {
+      overrideDriverInfoLocked: false,
       entryList: null,
       entryListText: null,
       jsonError: null,
@@ -450,7 +469,56 @@ export default {
     this.carSelectSettings.showNoCar = true
   },
   methods: {
-    onNew () {
+    dragFile(e) {
+      let files = e.dataTransfer.files;
+      let file = files[0];
+      const reader = new FileReader();
+
+      let result = null;
+
+      reader.addEventListener("load", () => {
+      result = reader.result;
+        this.entryList=JSON.parse(result);
+      }, false);
+
+      if (file) {
+        reader.readAsText(file, "UTF-16LE");
+      }
+
+    },reverseGrid(){
+
+        if (!this.hasDuplicateGridPosition()){
+        let entries = this.entryList.entries;
+        let gridPositions = [];
+        entries.forEach(entry => gridPositions.push(entry.defaultGridPosition))
+        entries.sort(function(a,b){
+          return b.defaultGridPosition - a.defaultGridPosition;
+        })
+
+        gridPositions.sort(function(a,b){
+          return a-b
+        });
+
+        entries.forEach((entry, index)=>{
+          entry.defaultGridPosition = gridPositions[index];
+        })
+
+        this.entryList.entries = entries;
+
+        }
+    },
+    hasDuplicateGridPosition(){
+      let entries = this.entryList.entries;
+      let result = false;
+      entries.forEach(currentElement => {
+        entries.forEach(element=>{
+          if (element.defaultGridPosition == currentElement.defaultGridPosition && element!=currentElement)
+          result = true;
+        })
+      });
+      return result;
+    },
+    onNew() {
       this.entryList = {
         entries: [],
         configVersion: 1,
@@ -482,6 +550,17 @@ export default {
       newList.entries.push(newCar)
       this.entryList = newList
     },
+    overrideAllDriverInfo(){
+      if (!this.overrideDriverInfoLocked)
+      return;
+      this.entryList.entries.forEach(entry =>{
+        entry.overrideDriverInfo=1;
+      })
+      let newList = cloneDeep(this.entryList)
+      this.entryList = newList
+
+
+    },
     onPropertyChange (entry, key, value, isInt = false) {
       // Before processing, apply some quick field validation
       if (key === 'raceNumber' && (value === '' || value === '0' || value < -1 || value > 998))
@@ -492,7 +571,9 @@ export default {
         value = null
       if (key === 'restrictor' && (value === '' || value < 0 || value > 20))
         value = null
-
+      if (key === 'overrideDriverInfo' && this.overrideDriverInfoLocked)
+      return;
+      
       // Clone existing entry list
       let newList = cloneDeep(this.entryList)
       // Find entry we want to modify
@@ -550,7 +631,11 @@ export default {
       // Update the existing entry list
       this.entryList = newList
     },
-    deleteEntry (entry) {
+    downloadEntryList() {
+      let data = Buffer.from(this.entryListText, "utf16le");
+      download(data, "entrylist.json", "application/json");
+    },
+    deleteEntry(entry) {
       // Clone existing entry list
       let newList = cloneDeep(this.entryList)
       // Find entry we want to modify

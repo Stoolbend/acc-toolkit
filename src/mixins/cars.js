@@ -155,6 +155,11 @@ export default {
           class: 'gt3',
           dlc: '2020 GT World Challenge Pack'
         },
+        30:{
+          name: 'BMW M4 GT3',
+          year: 2022,
+          class: 'gt3',
+        },
         50: {
           name: 'Alpine A110 GT4',
           year: 2018,

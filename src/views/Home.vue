@@ -69,7 +69,7 @@
       </div>
     </div>
     <div class="col-lg-3 col-md-6 col-12 d-flex flex-column align-items-center pb-3">
-      <div class="text-muted">
+      <b-link :to="{name: 'Event'}">
         <b-card 
           no-body 
           class="d-flex flex-column align-items-center p-3">
@@ -79,13 +79,13 @@
           <div>
             Event Editor
           </div>
-          <div class="text-danger">
+          <div >
             <small>
-              Coming soon...
+              event.json
             </small>
           </div>
         </b-card>
-      </div>
+      </b-link>
     </div>
   </div>
 </template>
