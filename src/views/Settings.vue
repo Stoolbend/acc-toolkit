@@ -222,7 +222,7 @@ platforms where TCP sockets act differently</b-form-select-option
         v-model="fileText"
         rows="10"
         class="mb-2"
-        placeholder="Drag & Drop your bop.json or paste its contents here..."
+        placeholder="Drag & Drop your settings.json or paste its contents here..."
       />
       <div class="d-flex flex-row justify-content-center mb-1">
         <b-button variant="secondary" @click="onNew">
@@ -234,7 +234,7 @@ platforms where TCP sockets act differently</b-form-select-option
         class="d-flex flex-row justify-content-center mb-1"
       >
         <b-button variant="secondary" @click="downloadFile">
-          Download eventRules.json
+          Download settings.json
         </b-button>
       </div>
     </div>

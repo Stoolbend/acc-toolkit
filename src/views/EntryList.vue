@@ -395,7 +395,7 @@
         class="d-flex flex-row justify-content-center mb-1"
       >
         <b-button variant="secondary" @click="downloadEntryList">
-          Download Entry List
+          Download entry list
         </b-button>
       </div>
     </div>

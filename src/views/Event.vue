@@ -196,8 +196,7 @@
       </div>
       <div v-else class="d-flex flex-column">
         <b-alert variant="info" show>
-          No BoP list is loaded. Paste in an existing one, or click "New BoP
-          list".
+          No event.json is loaded. Paste in an existing one, or click "New event.json".
         </b-alert>
       </div>
     </div>
@@ -212,11 +211,11 @@
         v-model="fileText"
         rows="10"
         class="mb-2"
-        placeholder="Drag & Drop your bop.json or paste its contents here..."
+        placeholder="Drag & Drop your event.json or paste its contents here..."
       />
       <div class="d-flex flex-row justify-content-center mb-1">
         <b-button variant="secondary" @click="onNew">
-          New Event
+          New event.json
         </b-button>
       </div>
       <div
