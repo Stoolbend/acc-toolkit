@@ -1,6 +1,6 @@
 <template>
-  <div class="row w-100">
-    <div class="col-12 m-3">
+  <div>
+    <div class="container">
       <h3>
         Welcome to ACC Toolkit
       </h3>
@@ -11,81 +11,121 @@
         If you have any issues or suggestions, then please let me know using the <b>Report an issue</b> button in the menu above.
       </p>
     </div>
-    <div class="col-lg-3 col-md-6 col-12 d-flex flex-column align-items-center pb-3">
-      <b-link :to="{ name: 'EntryList' }">
-        <b-card 
-          no-body 
-          class="d-flex flex-column align-items-center p-3">
-          <b-icon
-            icon="person-lines-fill"
-            font-scale="3" />
-          <div>
-            Entry List Editor
-          </div>
-          <div>
-            <small>
-              entrylist.json
-            </small>
-          </div>
-        </b-card>
-      </b-link>
-    </div>
-    <div class="col-lg-3 col-md-6 col-12 d-flex flex-column align-items-center pb-3">
-      <b-link :to="{ name: 'Bop' }">
-        <b-card 
-          no-body 
-          class="d-flex flex-column align-items-center p-3">
-          <b-icon
-            icon="percent"
-            font-scale="3" />
-          <div>
-            BoP Editor
-          </div>
-          <div>
-            <small>
-              bop.json
-            </small>
-          </div>
-        </b-card>
-      </b-link>
-    </div>
-    <div class="col-lg-3 col-md-6 col-12 d-flex flex-column align-items-center pb-3">
-      <div class="text-muted">
-        <b-card 
-          no-body 
-          class="d-flex flex-column align-items-center p-3">
-          <b-icon
-            icon="person-lines-fill"
-            font-scale="3" />
-          <div>
-            Custom Car Editor
-          </div>
-          <div class="text-danger">
-            <small>
-              Coming soon...
-            </small>
-          </div>
-        </b-card>
+    <div class="row justify-content-center align-items-middle w-100">
+      <div class="col-lg-3 col-md-6 col-12 d-flex flex-column align-items-center pb-3">
+        <b-link :to="{ name: 'EntryList' }">
+          <b-card 
+            no-body 
+            class="d-flex flex-column align-items-center p-3">
+            <b-icon
+              icon="person-lines-fill"
+              font-scale="3" />
+            <div>
+              Entry List Editor
+            </div>
+            <div>
+              <small>
+                entrylist.json
+              </small>
+            </div>
+          </b-card>
+        </b-link>
       </div>
-    </div>
-    <div class="col-lg-3 col-md-6 col-12 d-flex flex-column align-items-center pb-3">
-      <b-link :to="{name: 'Event'}">
-        <b-card 
-          no-body 
-          class="d-flex flex-column align-items-center p-3">
-          <b-icon
-            icon="calendar-week"
-            font-scale="3" />
-          <div>
-            Event Editor
-          </div>
-          <div >
-            <small>
-              event.json
-            </small>
-          </div>
-        </b-card>
-      </b-link>
+      <div class="col-lg-3 col-md-6 col-12 d-flex flex-column align-items-center pb-3">
+        <b-link :to="{ name: 'Bop' }">
+          <b-card 
+            no-body 
+            class="d-flex flex-column align-items-center p-3">
+            <b-icon
+              icon="percent"
+              font-scale="3" />
+            <div>
+              BoP Editor
+            </div>
+            <div>
+              <small>
+                bop.json
+              </small>
+            </div>
+          </b-card>
+        </b-link>
+      </div>
+      <div class="col-lg-3 col-md-6 col-12 d-flex flex-column align-items-center pb-3">
+        <b-link :to="{name: 'Event'}">
+          <b-card 
+            no-body 
+            class="d-flex flex-column align-items-center p-3">
+            <b-icon
+              icon="calendar-week"
+              font-scale="3" />
+            <div>
+              Event Editor
+            </div>
+            <div >
+              <small>
+                event.json
+              </small>
+            </div>
+          </b-card>
+        </b-link>
+      </div>
+      <div class="col-lg-3 col-md-6 col-12 d-flex flex-column align-items-center pb-3">
+        <b-link :to="{name: 'Rules'}">
+          <b-card 
+            no-body 
+            class="d-flex flex-column align-items-center p-3">
+            <b-icon
+              icon="cone-striped"
+              font-scale="3" />
+            <div>
+              Event Rules Editor
+            </div>
+            <div >
+              <small>
+                eventRules.json
+              </small>
+            </div>
+          </b-card>
+        </b-link>
+      </div>
+      <div class="col-lg-3 col-md-6 col-12 d-flex flex-column align-items-center pb-3">
+        <b-link :to="{name: 'Settings'}">
+          <b-card 
+            no-body 
+            class="d-flex flex-column align-items-center p-3">
+            <b-icon
+              icon="gear"
+              font-scale="3" />
+            <div>
+              Settings Editor
+            </div>
+            <div >
+              <small>
+                settings.json
+              </small>
+            </div>
+          </b-card>
+        </b-link>
+      </div>
+      <div class="col-lg-3 col-md-6 col-12 d-flex flex-column align-items-center pb-3">
+        <div class="text-muted">
+          <b-card 
+            no-body 
+            class="d-flex flex-column align-items-center p-3">
+            <b-icon
+              icon="person-lines-fill"
+              font-scale="3" />
+            <div>
+              Custom Car Editor
+            </div>
+            <div class="text-danger">
+              <small>
+                Coming soon...
+              </small>
+            </div>
+          </b-card>
+        </div>
+      </div>
     </div>
   </div>
 </template>

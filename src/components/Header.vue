@@ -25,13 +25,11 @@
             Event Editor
           </div>
         </b-nav-item>
-        
         <b-nav-item :to="{ name: 'Rules' }">
           <div class="d-flex flex-row align-items-center">
             Event Rules
           </div>
-        </b-nav-item> 
-        
+        </b-nav-item>
         <b-nav-item :to="{ name: 'Settings' }">
           <div class="d-flex flex-row align-items-center">
             Settings Editor
