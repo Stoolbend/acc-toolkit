@@ -10,10 +10,17 @@
       <div class="d-flex flex-row align-items-center">
         Made with ❤ by 
         <b-link 
-          class="ml-1"
+          class="ml-1 mr-1"
           href="https://github.com/Stoolbend" 
           target="_blank">
           Stoolbend#0306
+        </b-link>
+        &amp;
+        <b-link
+          class="ml-1"
+          href="https://github.com/Stoolbend/acc-toolkit/graphs/contributors"
+          target="_blank">
+          friends
         </b-link>
       </div>
     </div>
