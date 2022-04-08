@@ -44,7 +44,7 @@ export default {
           class: 'gt3'
         },
         4: {
-          name: 'Lamborghini Huracan GT3',
+          name: 'Lamborghini Huracán GT3',
           year: 2015,
           class: 'gt3'
         },
@@ -71,7 +71,7 @@ export default {
         9: {
           name: 'Porsche 991 II GT3 Cup',
           year: 2017,
-          class: 'cup'
+          class: 'gtc'
         },
         10: {
           name: 'Nissan GT-R Nismo GT3',
@@ -104,7 +104,7 @@ export default {
           class: 'gt3'
         },
         16: {
-          name: 'Lamborghini Huracan GT3 Evo',
+          name: 'Lamborghini Huracán GT3 Evo',
           year: 2019,
           class: 'gt3'
         },
@@ -114,9 +114,9 @@ export default {
           class: 'gt3'
         },
         18: {
-          name: 'Lamborghini Huracan SuperTrofeo',
+          name: 'Lamborghini Huracán SuperTrofeo',
           year: 2015,
-          class: 'st'
+          class: 'gtc'
         },
         19: {
           name: 'Audi R8 LMS Evo',
@@ -158,38 +158,37 @@ export default {
         26: {
           name: 'Ferrari 488 Challenge Evo',
           year: 2022,
-          class: 'Chl',
-          dlc: '2022 Car content update'
+          class: 'gtc',
+          dlc: 'Challengers Pack'
         },
         27: {
-          name: 'BMW M2 CS Racing',
+          name: 'BMW M2 Club Sport Racing',
           year: 2022,
-          class: 'Tcx',
-          dlc: '2022 Car content update'
+          class: 'tcx',
+          dlc: 'Challengers Pack'
         },
         28: {
-          name: 'Porsche 911 GT3 Cup Type 992',
+          name: 'Porsche 992 GT3 Cup',
           year: 2022,
-          class: 'Cup',
-          dlc: '2022 Car content update'
+          class: 'gtc',
+          dlc: 'Challengers Pack'
         },
         29: {
-          name: 'Lamborghini Huracan Super Trofeo EVO2',
+          name: 'Lamborghini Huracán SuperTrofeo EVO2',
           year: 2022,
-          class: 'St',
-          dlc: '2022 Car content update'
+          class: 'gtc',
+          dlc: 'Challengers Pack'
         },
         30: {
           name: 'BMW M4 GT3',
           year: 2022,
-          class: 'gt3',
-          dlc: '2022 Car content update'
+          class: 'gt3'
         },
         31: {
-          name: 'Audi R8 LMS GT3 evo II',
+          name: 'Audi R8 LMS GT3 Evo 2',
           year: 2022,
           class: 'gt3',
-          dlc: '2022 Car content update'
+          dlc: 'Challengers Pack'
         },
         50: {
           name: 'Alpine A110 GT4',
