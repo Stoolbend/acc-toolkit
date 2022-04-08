@@ -155,10 +155,41 @@ export default {
           class: 'gt3',
           dlc: '2020 GT World Challenge Pack'
         },
-        30:{
+        26: {
+          name: 'Ferrari 488 Challenge Evo',
+          year: 2022,
+          class: 'Chl',
+          dlc: '2022 Car content update'
+        },
+        27: {
+          name: 'BMW M2 CS Racing',
+          year: 2022,
+          class: 'Tcx',
+          dlc: '2022 Car content update'
+        },
+        28: {
+          name: 'Porsche 911 GT3 Cup Type 992',
+          year: 2022,
+          class: 'Cup',
+          dlc: '2022 Car content update'
+        },
+        29: {
+          name: 'Lamborghini Huracan Super Trofeo EVO2',
+          year: 2022,
+          class: 'St',
+          dlc: '2022 Car content update'
+        },
+        30: {
           name: 'BMW M4 GT3',
           year: 2022,
           class: 'gt3',
+          dlc: '2022 Car content update'
+        },
+        31: {
+          name: 'Audi R8 LMS GT3 evo II',
+          year: 2022,
+          class: 'gt3',
+          dlc: '2022 Car content update'
         },
         50: {
           name: 'Alpine A110 GT4',
