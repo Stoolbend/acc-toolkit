@@ -24,6 +24,7 @@
             </b-td>
             <b-td>
               <b-form-input
+                number
                 type="number"
                 max="600"
                 min="0"
@@ -33,6 +34,7 @@
             </b-td>
             <b-td>
               <b-form-input
+                number
                 type="number"
                 @change="onUpdate()"
                 v-model="file.sessionOverTimeSeconds"
@@ -42,6 +44,7 @@
             </b-td>
             <b-td>
               <b-form-input
+                number
                 type="number"
                 @change="onUpdate()"
                 v-model="file.ambientTemp"
@@ -51,6 +54,7 @@
             </b-td>
             <b-td>
               <b-form-input
+                number
                 type="number"
                 @change="onUpdate()"
                 v-model="file.cloudLevel"
@@ -62,6 +66,7 @@
             </b-td>
             <b-td>
               <b-form-input
+                number
                 type="number"
                 @change="onUpdate()"
                 v-model="file.rain"
@@ -73,6 +78,7 @@
             </b-td>
             <b-td>
               <b-form-input
+                number
                 type="number"
                 @change="onUpdate()"
                 v-model="file.weatherRandomness"
@@ -107,6 +113,7 @@
           <template #cell(hourOfDay)="item">
             <div>
               <b-form-spinbutton
+                number
                 class="w-50"
                 min="0"
                 max="23"
@@ -123,9 +130,9 @@
                 @change="onUpdate()"
                 v-model="file.sessions[item.index].dayOfWeekend"
               >
-                <b-form-select-option value="1">Friday</b-form-select-option>
-                <b-form-select-option value="2">Saturday</b-form-select-option>
-                <b-form-select-option value="3"
+                <b-form-select-option  :value="1">Friday</b-form-select-option>
+                <b-form-select-option  :value="2">Saturday</b-form-select-option>
+                <b-form-select-option  :value="3"
                   >Sunday</b-form-select-option
                 ></b-form-select
               >
@@ -134,6 +141,7 @@
           <template #cell(sessionDurationMinutes)="item">
             <div>
               <b-form-input
+                number
                 type="number"
                 max="1440"
                 min="0"
@@ -145,6 +153,7 @@
           <template #cell(timeMultiplier)="item">
             <div>
               <b-form-spinbutton
+                number
                 class="w-50"
                 min="0"
                 max="24"
@@ -196,7 +205,8 @@
       </div>
       <div v-else class="d-flex flex-column">
         <b-alert variant="info" show>
-          No event.json is loaded. Paste in an existing one, or click "New event.json".
+          No event.json is loaded. Paste in an existing one, or click "New
+          event.json".
         </b-alert>
       </div>
     </div>
@@ -255,7 +265,7 @@ import sessionTypes from "../mixins/sessionTypes";
 
 export default {
   name: "Bop",
-  mixins: [tracks,  sessionTypes],
+  mixins: [tracks, sessionTypes],
   data() {
     return {
       file: null,

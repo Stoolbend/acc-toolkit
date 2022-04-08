@@ -32,6 +32,7 @@
 
             <b-td
               ><b-form-input
+                number
                 type="number"
                 v-model="file.pitWindowLengthSec"
                 min="-1"
@@ -40,6 +41,7 @@
             ></b-td>
             <b-td
               ><b-form-input
+                number
                 type="number"
                 v-model="file.driverStintTimeSec"
                 min="-1"
@@ -48,6 +50,7 @@
             ></b-td>
             <b-td
               ><b-form-input
+                number
                 type="number"
                 v-model="file.mandatoryPitstopCount"
                 min="-1"
@@ -56,6 +59,7 @@
             ></b-td>
             <b-td
               ><b-form-input
+                number
                 type="number"
                 v-model="file.maxTotalDrivingTime"
                 min="-1"
@@ -64,6 +68,7 @@
             ></b-td>
             <b-td
               ><b-form-input
+                number
                 type="number"
                 v-model="file.maxDriversCount"
                 min="-1"
@@ -117,6 +122,7 @@
             >
             <b-td
               ><b-form-input
+                number
                 type="number"
                 v-model="file.tyreSetCount"
                 max="50"
@@ -274,3 +280,4 @@ export default {
   display: none;
 }
 </style>
+

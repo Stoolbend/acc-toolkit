@@ -44,6 +44,7 @@
             ></b-td>
             <b-td
               ><b-form-input
+                number
                 type="number"
                 v-model="file.trackMedalsRequirement"
                 min="-1"
@@ -53,6 +54,7 @@
             ></b-td>
             <b-td
               ><b-form-input
+                number
                 type="number"
                 v-model="file.safetyRatingRequirement"
                 min="-1"
@@ -62,6 +64,7 @@
             ></b-td>
             <b-td
               ><b-form-input
+                number
                 type="number"
                 v-model="file.racecraftRatingRequirement"
                 min="-1"
@@ -93,6 +96,7 @@
             ></b-td>
             <b-td
               ><b-form-input
+                number
                 type="number"
                 v-model="file.maxCarSlots"
                 min="-1"
