@@ -15,7 +15,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 export default {
-  data () {
+  data() {
     return {
       carData: {
         '-1': {
@@ -190,6 +190,24 @@ export default {
           class: 'gt3',
           dlc: 'Challengers Pack'
         },
+        32: {
+          name: 'Ferrari 296 GT3',
+          year: 2023,
+          class: 'gt3',
+          dlc: 'GT World Challenge 2023 Pack'
+        },
+        33: {
+          name: 'Lamborghini Huracan GT3 Evo 2',
+          year: 2023,
+          class: 'gt3',
+          dlc: 'GT World Challenge 2023 Pack'
+        },
+        34: {
+          name: 'Porsche 992 GT3 R',
+          year: 2023,
+          class: 'gt3',
+          dlc: 'GT World Challenge 2023 Pack'
+        },
         50: {
           name: 'Alpine A110 GT4',
           year: 2018,
@@ -263,7 +281,7 @@ export default {
     }
   },
   computed: {
-    carSelectOptions () {
+    carSelectOptions() {
       //TODO implement a filter for cup class
       let options = []
       if (this.carData) {
@@ -278,7 +296,7 @@ export default {
           } else {
             options.push({
               value: parseInt(key),
-              text: this.carData[key].name + ' (' + this.carData[key].year + ')[' + this.carData[key].class +']'
+              text: this.carData[key].name + ' (' + this.carData[key].year + ')[' + this.carData[key].class + ']'
             })
           }
         }
