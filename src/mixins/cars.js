@@ -208,6 +208,11 @@ export default {
           class: 'gt3',
           dlc: 'GT World Challenge 2023 Pack'
         },
+        35: {
+          name: 'McLaren 720S GT3 Evo',
+          year: 2023,
+          class: 'gt3',
+        },
         50: {
           name: 'Alpine A110 GT4',
           year: 2018,
