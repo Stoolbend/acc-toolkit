@@ -156,10 +156,9 @@ export default {
           dlc: '2020 GT World Challenge Pack'
         },
         26: {
-          name: 'Ferrari 488 Challenge Evo',
+          name: 'BMW M4 GT3',
           year: 2022,
-          class: 'gtc',
-          dlc: 'Challengers Pack'
+          class: 'gt3'
         },
         27: {
           name: 'BMW M2 Club Sport Racing',
@@ -180,9 +179,10 @@ export default {
           dlc: 'Challengers Pack'
         },
         30: {
-          name: 'BMW M4 GT3',
+          name: 'Ferrari 488 Challenge Evo',
           year: 2022,
-          class: 'gt3'
+          class: 'gtc',
+          dlc: 'Challengers Pack'
         },
         31: {
           name: 'Audi R8 LMS GT3 Evo 2',
