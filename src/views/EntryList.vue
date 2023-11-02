@@ -1,77 +1,41 @@
 <template>
   <div class="row m-1" @dragover.prevent @drop.prevent @drop="dragFile">
     <div class="col-12">
-      <div
-        v-if="entryList" 
-        class="d-flex flex-column">
-        <b-table
-          striped
-          bordered
-          :fields="fields"
-          :items="entries">
-          <template #head(car) >
-            <b-row class="col px-md-5"> Car
-            <b-checkbox class="font-weight-lighter col px-md-5" v-model="overrideDriverInfoLocked" @input="overrideAllDriverInfo">Lock override driver info on</b-checkbox>
-          </b-row></template>
+      <div v-if="entryList" class="d-flex flex-column">
+        <b-table striped bordered :fields="fields" :items="entries">
+          <template #head(car)>
+            <b-row class="col px-md-5">Car</b-row>
+          </template>
           <template #cell(drivers)="data">
             <template v-if="data.item.drivers.length < 1">
               <div class="d-flex flex-column align-items-center w-100">
-                <b-icon 
-                  icon="exclamation-triangle"
-                  variant="danger"
-                  font-scale="3"/>
+                <b-icon icon="exclamation-triangle" variant="danger" font-scale="3" />
                 <small>
                   At least 1 driver is required
                 </small>
               </div>
             </template>
             <div class="d-flex flex-column">
-              <b-collapse
-                :id="'collapse-drivers-' + getHash(data.item)"
-                visible>
+              <b-collapse :id="'collapse-drivers-' + getHash(data.item)" visible>
                 <template v-for="(driver, index) in data.item.drivers">
-                  <b-card 
-                    :key="driver.playerID"
-                    no-body 
-                    class="p-2 mb-1">
+                  <b-card :key="driver.playerID" no-body class="p-2 mb-1">
                     <div class="d-flex flex-row pb-1">
-                      <b-input-group 
-                        size="sm">
-                        <b-input
-                          type="text"
-                          :value="driver.firstName"
-                          placeholder="First name"
-                          @change="onDriverPropertyChange(driver, data.item, 'firstName', $event)" />
-                        <b-input
-                          type="text"
-                          :value="driver.lastName"
-                          placeholder="Last name"
-                          @change="onDriverPropertyChange(driver, data.item, 'lastName', $event)" />
+                      <b-input-group size="sm">
+                        <b-input type="text" :value="driver.firstName" placeholder="First name" @change="onDriverPropertyChange(driver, data.item, 'firstName', $event)" />
+                        <b-input type="text" :value="driver.lastName" placeholder="Last name" @change="onDriverPropertyChange(driver, data.item, 'lastName', $event)" />
                       </b-input-group>
                     </div>
                     <div class="d-flex flex-row pb-1">
-                      <b-input-group 
-                        size="sm"
-                        prepend="Short name">
-                        <b-input
-                          type="text"
-                          lazy
-                          :value="driver.shortName"
-                          @change="onDriverPropertyChange(driver, data.item, 'shortName', $event)" />
+                      <b-input-group size="sm" prepend="Short name">
+                        <b-input type="text" lazy :value="driver.shortName" @change="onDriverPropertyChange(driver, data.item, 'shortName', $event)" />
                       </b-input-group>
                     </div>
                     <div class="d-flex flex-row pb-1">
-                      <b-input-group 
-                        size="sm"
-                        prepend="Driver category">
-                        <b-select
-                          :options="driverCategorySelectOptions"
-                          :value="driver.driverCategory" 
+                      <b-input-group size="sm" prepend="Driver category">
+                        <b-select :options="driverCategorySelectOptions" :value="driver.driverCategory"
                           @change="onDriverPropertyChange(driver, data.item, 'driverCategory', $event, true)" />
                         <b-input-group-append>
-                          <b-button 
-                            v-if="driver.driverCategory || driver.driverCategory === 0"
-                            variant="secondary"
+                          <b-button v-if="driver.driverCategory || driver.driverCategory === 0" variant="secondary"
                             @click="onDriverPropertyChange(driver, data.item, 'driverCategory', null, true)">
                             Remove
                           </b-button>
@@ -79,62 +43,32 @@
                       </b-input-group>
                     </div>
                     <div class="d-flex flex-row pb-1">
-                      <b-input-group 
-                        size="sm"
-                        prepend="Steam ID">
-                        <b-input
-                          type="text"
-                          :value="driver.playerID"
-                          @change="onDriverPropertyChange(driver, data.item, 'playerID', $event)" />
+                      <b-input-group size="sm" prepend="Steam ID">
+                        <b-input type="text" :value="driver.playerID" @change="onDriverPropertyChange(driver, data.item, 'playerID', $event)" />
                       </b-input-group>
                     </div>
                     <div class="d-flex flex-row justify-content-between">
                       <b-button-group>
-                        <b-button
-                          v-if="index > 0"
-                          variant="primary"
-                          size="sm"
-                          @click="swapDriver(index, index - 1, data.item)">
-                          <b-icon icon="arrow-up"/>
+                        <b-button v-if="index > 0" variant="primary" size="sm" @click="swapDriver(index, index - 1, data.item)">
+                          <b-icon icon="arrow-up" />
                         </b-button>
-                        <b-button
-                          v-if="index < getDriversLength(data.item) - 1"
-                          variant="primary"
-                          size="sm"
-                          @click="swapDriver(index, index + 1, data.item)">
-                          <b-icon icon="arrow-down"/>
+                        <b-button v-if="index < getDriversLength(data.item) - 1" variant="primary" size="sm" @click="swapDriver(index, index + 1, data.item)">
+                          <b-icon icon="arrow-down" />
                         </b-button>
                       </b-button-group>
-                      <b-button
-                        variant="danger"
-                        size="sm"
-                        v-b-tooltip.hover
-                        title="Delete driver"
-                        @click="deleteDriver(driver, data.item)">
-                        <b-icon icon="trash-fill"/>
+                      <b-button variant="danger" size="sm" v-b-tooltip.hover title="Delete driver" @click="deleteDriver(driver, data.item)">
+                        <b-icon icon="trash-fill" />
                       </b-button>
                     </div>
                     <div class="d-flex flex-column align-items-center">
-                      <div 
-                        v-if="!driver.playerID"
-                        class="d-flex flex-row align-items-center pt-1">
-                        <b-icon 
-                          icon="exclamation-triangle-fill"
-                          variant="danger"
-                          font-scale="1.2"
-                          class="mr-2"/>
+                      <div v-if="!driver.playerID" class="d-flex flex-row align-items-center pt-1">
+                        <b-icon icon="exclamation-triangle-fill" variant="danger" font-scale="1.2" class="mr-2" />
                         <small>
                           Steam ID is empty
                         </small>
                       </div>
-                      <div 
-                        v-if="!data.item.overrideDriverInfo"
-                        class="d-flex flex-row align-items-center pt-1">
-                        <b-icon 
-                          icon="exclamation-triangle-fill"
-                          variant="warning"
-                          font-scale="1.2"
-                          class="mr-2"/>
+                      <div v-if="!data.item.overrideDriverInfo" class="d-flex flex-row align-items-center pt-1">
+                        <b-icon icon="exclamation-triangle-fill" variant="warning" font-scale="1.2" class="mr-2" />
                         <small>
                           Override driver info is disabled
                         </small>
@@ -155,50 +89,26 @@
               <b-card no-body class="p-2">
                 <div class="d-flex flex-column">
                   <div class="d-flex flex-row align-items-center pb-1">
-                    <b-input-group 
-                      size="sm"
-                      prepend="Race number">
-                      <b-input
-                        type="number"
-                        min="-1"
-                        max="998"
-                        :value="data.item.raceNumber" 
-                        @change="onPropertyChange(data.item, 'raceNumber', $event, true)" />
+                    <b-input-group size="sm" prepend="Race number">
+                      <b-input type="number" min="-1" max="998" :value="data.item.raceNumber" @change="onPropertyChange(data.item, 'raceNumber', $event, true)" />
                       <b-input-group-append>
-                        <b-button 
-                          v-if="data.item.raceNumber !== -1"
-                          variant="secondary"
-                          @click="onPropertyChange(data.item, 'raceNumber', -1, true)">
+                        <b-button v-if="data.item.raceNumber !== -1" variant="secondary" @click="onPropertyChange(data.item, 'raceNumber', -1, true)">
                           Remove
                         </b-button>
-                        <b-button 
-                          v-else
-                          variant="primary"
-                          @click="onPropertyChange(data.item, 'raceNumber', $utils.getNextAvailableCarNumber(entryList.entries), true)">
+                        <b-button v-else variant="primary" @click="onPropertyChange(data.item, 'raceNumber', $utils.getNextAvailableCarNumber(entryList.entries), true)">
                           Generate
                         </b-button>
                       </b-input-group-append>
                     </b-input-group>
                   </div>
                   <div class="d-flex flex-row align-items-center pb-1">
-                    <b-input-group 
-                      size="sm"
-                      prepend="Car model">
-                      <b-select
-                        :options="carSelectOptions"
-                        :value="data.item.forcedCarModel" 
-                        @change="onPropertyChange(data.item, 'forcedCarModel', $event, true)" />
+                    <b-input-group size="sm" prepend="Car model">
+                      <b-select :options="carSelectOptions" :value="data.item.forcedCarModel" @change="onPropertyChange(data.item, 'forcedCarModel', $event, true)" />
                     </b-input-group>
                   </div>
                   <div class="d-flex flex-row align-items-center pb-1">
-                    <b-input-group 
-                      size="sm"
-                      prepend="Custom car JSON">
-                      <b-input
-                        type="text"
-                        placeholder="No custom car JSON"
-                        :value="data.item.customCar" 
-                        @change="onPropertyChange(data.item, 'customCar', $event)" />
+                    <b-input-group size="sm" prepend="Custom car JSON">
+                      <b-input type="text" placeholder="No custom car JSON" :value="data.item.customCar" @change="onPropertyChange(data.item, 'customCar', $event)" />
                     </b-input-group>
                   </div>
                   <div class="d-flex flex-row align-items-center">
@@ -207,10 +117,7 @@
                         Override car model for custom car
                       </small>
                     </div>
-                    <b-checkbox
-                      v-model="data.item.overrideCarModelForCustomCar" 
-                      value="1"
-                      unchecked-value="0"
+                    <b-checkbox v-model="data.item.overrideCarModelForCustomCar" value="1" unchecked-value="0"
                       @change="onPropertyChange(data.item, 'overrideCarModelForCustomCar', $event, true)" />
                   </div>
                   <div class="d-flex flex-row align-items-center">
@@ -219,71 +126,37 @@
                         Override driver info
                       </small>
                     </div>
-                    <b-checkbox
-                      v-model="data.item.overrideDriverInfo"
-                      :disabled="overrideDriverInfoLocked? true: false"
-                      value="1"
-                      unchecked-value="0"
-                      @change="onPropertyChange(data.item, 'overrideDriverInfo', $event, true)" />
+                    <b-checkbox v-model="data.item.overrideDriverInfo" value="1" unchecked-value="0" @change="onPropertyChange(data.item, 'overrideDriverInfo', $event, true)" />
                   </div>
                 </div>
               </b-card>
               <b-card no-body class="p-2">
                 <div class="d-flex flex-column">
                   <div class="d-flex flex-row align-items-center pb-1">
-                    <b-input-group 
-                      size="sm"
-                      prepend="Grid position">
-                      <b-input
-                        type="number"
-                        min="1"
-                        :value="data.item.defaultGridPosition" 
-                        @change="onPropertyChange(data.item, 'defaultGridPosition', $event, true)" />
+                    <b-input-group size="sm" prepend="Grid position">
+                      <b-input type="number" min="1" :value="data.item.defaultGridPosition" @change="onPropertyChange(data.item, 'defaultGridPosition', $event, true)" />
                       <b-input-group-append>
-                        <b-button 
-                          v-if="data.item.defaultGridPosition"
-                          variant="secondary"
-                          @click="onPropertyChange(data.item, 'defaultGridPosition', null, true)">
+                        <b-button v-if="data.item.defaultGridPosition" variant="secondary" @click="onPropertyChange(data.item, 'defaultGridPosition', null, true)">
                           Remove
                         </b-button>
                       </b-input-group-append>
                     </b-input-group>
                   </div>
                   <div class="d-flex flex-row align-items-center pb-1">
-                    <b-input-group 
-                      size="sm"
-                      prepend="Ballast (kg)">
-                      <b-input
-                        type="number"
-                        min="0"
-                        max="100"
-                        :value="data.item.ballastKg" 
-                        @change="onPropertyChange(data.item, 'ballastKg', $event, true)" />
+                    <b-input-group size="sm" prepend="Ballast (kg)">
+                      <b-input type="number" min="0" max="100" :value="data.item.ballastKg" @change="onPropertyChange(data.item, 'ballastKg', $event, true)" />
                       <b-input-group-append>
-                        <b-button 
-                          v-if="data.item.ballastKg"
-                          variant="secondary"
-                          @click="onPropertyChange(data.item, 'ballastKg', null, true)">
+                        <b-button v-if="data.item.ballastKg" variant="secondary" @click="onPropertyChange(data.item, 'ballastKg', null, true)">
                           Remove
                         </b-button>
                       </b-input-group-append>
                     </b-input-group>
                   </div>
                   <div class="d-flex flex-row align-items-center pb-1">
-                    <b-input-group 
-                      size="sm"
-                      prepend="Restrictor (%)">
-                      <b-input
-                        type="number"
-                        min="0"
-                        max="20"
-                        :value="data.item.restrictor" 
-                        @change="onPropertyChange(data.item, 'restrictor', $event, true)" />
+                    <b-input-group size="sm" prepend="Restrictor (%)">
+                      <b-input type="number" min="0" max="20" :value="data.item.restrictor" @change="onPropertyChange(data.item, 'restrictor', $event, true)" />
                       <b-input-group-append>
-                        <b-button 
-                          v-if="data.item.restrictor"
-                          variant="secondary"
-                          @click="onPropertyChange(data.item, 'restrictor', null, true)">
+                        <b-button v-if="data.item.restrictor" variant="secondary" @click="onPropertyChange(data.item, 'restrictor', null, true)">
                           Remove
                         </b-button>
                       </b-input-group-append>
@@ -295,11 +168,7 @@
                         Server Admin
                       </small>
                     </div>
-                    <b-checkbox
-                      v-model="data.item.isServerAdmin" 
-                      value="1"
-                      unchecked-value="0"
-                      @change="onPropertyChange(data.item, 'isServerAdmin', $event, true)" />
+                    <b-checkbox v-model="data.item.isServerAdmin" value="1" unchecked-value="0" @change="onPropertyChange(data.item, 'isServerAdmin', $event, true)" />
                   </div>
                 </div>
               </b-card>
@@ -307,39 +176,34 @@
           </template>
           <template #cell(actions)="data">
             <div class="d-flex flex-column align-items-center w-100">
-              <b-button 
-                class="mb-1"
-                size="sm"
-                variant="success"
-                @click="addDriver(data.item)">
+              <b-button class="mb-1" size="sm" variant="success" @click="addDriver(data.item)">
                 Add driver
               </b-button>
-              <b-button 
-                class="mb-1"
-                size="sm"
-                variant="outline-secondary"
-                v-b-toggle="'collapse-drivers-' + getHash(data.item)">
+              <b-button class="mb-1" size="sm" variant="outline-secondary" v-b-toggle="'collapse-drivers-' + getHash(data.item)">
                 <span class="when-open">Hide</span><span class="when-closed">Show</span> drivers
               </b-button>
-              <b-button 
-                class="mb-1"
-                size="sm"
-                variant="danger"
-                @click="deleteEntry(data.item)">
+              <b-button class="mb-1" size="sm" variant="danger" @click="deleteEntry(data.item)">
                 Delete entry
               </b-button>
             </div>
           </template>
         </b-table>
-        <div class="d-flex flex-row justify-content-center pb-2">
-          <div class="mr-2">
-            Reject drivers not on entry list
+        <div class="d-flex flex-row justify-content-around pb-2">
+          <div class="d-flex flex-row align-items-center">
+            <div class="mr-2">
+              Reject drivers not on entry list
+            </div>
+            <b-checkbox v-model="entryList.forceEntryList" value="1" unchecked-value="0" @change="toggleForceEntryList" />
           </div>
-          <b-checkbox
-            v-model="entryList.forceEntryList" 
-            value="1"
-            unchecked-value="0"
-            @change="toggleForceEntryList" />
+          <div class="d-flex flex-row align-items-center" style="gap: 0.5em;">
+            <span><b>Override driver info</b></span>
+            <b-button variant="secondary" size="sm" @click="overrideDriverInfoAllOn">
+              All on
+            </b-button>
+            <b-button variant="secondary" size="sm" @click="overrideDriverInfoAllOff">
+              All off
+            </b-button>
+          </div>
         </div>
         <div class="d-flex flex-column align-items-center pb-2">
           <div>
@@ -347,23 +211,18 @@
           </div>
         </div>
         <div class="d-flex flex-row justify-content-center mt-2">
-          <b-button
-            variant="success"
-            @click="onAdd">
+          <b-button variant="success" @click="onAdd">
             Add car
           </b-button>
-            <b-button  v-b-modal.reverse variant="warning">
+          <b-button v-b-modal.reverse variant="warning">
             Reverse Grid
           </b-button>
-          <b-modal @ok="reverseGrid()" id="reverse" title="Reverse the Grid">Do You want to reverse the grid based on the default grid position? This will only work if there are no duplicates.</b-modal>
+          <b-modal @ok="reverseGrid()" id="reverse" title="Reverse the Grid">Do You want to reverse the grid based on the default grid position? This will only work if there are no
+            duplicates.</b-modal>
         </div>
       </div>
-      <div
-        v-else
-        class="d-flex flex-column">
-        <b-alert
-          variant="info"
-          show>
+      <div v-else class="d-flex flex-column">
+        <b-alert variant="info" show>
           No entrylist is loaded. Paste in an existing one, or click "New entry list".
         </b-alert>
       </div>
@@ -372,28 +231,16 @@
       <hr />
     </div>
     <div class="col-12 d-flex flex-column align-items-center">
-      <b-alert
-        variant="danger"
-        :show="!!jsonError"
-        class="mb-2">
+      <b-alert variant="danger" :show="!!jsonError" class="mb-2">
         {{ jsonError }}
       </b-alert>
-      <b-textarea
-        v-model="entryListText" 
-        rows="10"
-        class="mb-2"
-        placeholder="Drag & Drop your entrylist.json or paste its contents here..." />
+      <b-textarea v-model="entryListText" rows="10" class="mb-2" placeholder="Drag & Drop your entrylist.json or paste its contents here..." />
       <div class="d-flex flex-row justify-content-center mb-1">
-        <b-button
-          variant="secondary"
-          @click="onNew">
+        <b-button variant="secondary" @click="onNew">
           New entry list
         </b-button>
       </div>
-      <div
-        v-if="!!this.entryList"
-        class="d-flex flex-row justify-content-center mb-1"
-      >
+      <div v-if="!!this.entryList" class="d-flex flex-row justify-content-center mb-1">
         <b-button variant="secondary" @click="downloadEntryList">
           Download entry list
         </b-button>
@@ -428,10 +275,9 @@ import download from 'downloadjs'
 
 export default {
   name: 'EntryList',
-  mixins: [ cars, driverCategories ],
-  data () {
+  mixins: [cars, driverCategories],
+  data() {
     return {
-      overrideDriverInfoLocked: false,
       entryList: null,
       entryListText: null,
       jsonError: null,
@@ -447,7 +293,7 @@ export default {
     }
   },
   computed: {
-    entries () {
+    entries() {
       if (this.entryList && Object.prototype.hasOwnProperty.call(this.entryList, 'entries') && Array.isArray(this.entryList.entries))
         return this.entryList.entries
       else return []
@@ -464,7 +310,7 @@ export default {
       return totalDrivers
     }
   },
-  mounted () {
+  mounted() {
     // Setting from mixins/cars.js to enable the -1 "No forced car" option.
     this.carSelectSettings.showNoCar = true
   },
@@ -477,43 +323,43 @@ export default {
       let result = null;
 
       reader.addEventListener("load", () => {
-      result = reader.result;
-        this.entryList=JSON.parse(result);
+        result = reader.result;
+        this.entryList = JSON.parse(result);
       }, false);
 
       if (file) {
         reader.readAsText(file, "UTF-16LE");
       }
 
-    },reverseGrid(){
+    }, reverseGrid() {
 
-        if (!this.hasDuplicateGridPosition()){
+      if (!this.hasDuplicateGridPosition()) {
         let entries = this.entryList.entries;
         let gridPositions = [];
         entries.forEach(entry => gridPositions.push(entry.defaultGridPosition))
-        entries.sort(function(a,b){
+        entries.sort(function (a, b) {
           return b.defaultGridPosition - a.defaultGridPosition;
         })
 
-        gridPositions.sort(function(a,b){
-          return a-b
+        gridPositions.sort(function (a, b) {
+          return a - b
         });
 
-        entries.forEach((entry, index)=>{
+        entries.forEach((entry, index) => {
           entry.defaultGridPosition = gridPositions[index];
         })
 
         this.entryList.entries = entries;
 
-        }
+      }
     },
-    hasDuplicateGridPosition(){
+    hasDuplicateGridPosition() {
       let entries = this.entryList.entries;
       let result = false;
       entries.forEach(currentElement => {
-        entries.forEach(element=>{
-          if (element.defaultGridPosition == currentElement.defaultGridPosition && element!=currentElement)
-          result = true;
+        entries.forEach(element => {
+          if (element.defaultGridPosition == currentElement.defaultGridPosition && element != currentElement)
+            result = true;
         })
       });
       return result;
@@ -525,7 +371,7 @@ export default {
         forceEntryList: 0
       }
     },
-    onEntryListUpdate (val) {
+    onEntryListUpdate(val) {
       console.debug('Entry list has changed.')
       this.entryList = val
     },
@@ -534,7 +380,7 @@ export default {
         return entry.drivers.length
       } else return 0
     },
-    onAdd () {
+    onAdd() {
       let newCar = {
         drivers: [],
         raceNumber: this.$utils.getNextAvailableCarNumber(this.entryList.entries),
@@ -550,21 +396,24 @@ export default {
       newList.entries.push(newCar)
       this.entryList = newList
     },
-    overrideAllDriverInfo(){
-      if (!this.overrideDriverInfoLocked)
-      return;
-      this.entryList.entries.forEach(entry =>{
-        entry.overrideDriverInfo=1;
+    overrideDriverInfoAllOn() {
+      this.entryList.entries.forEach(entry => {
+        entry.overrideDriverInfo = 1;
       })
       let newList = cloneDeep(this.entryList)
       this.entryList = newList
-
-
     },
-    onPropertyChange (entry, key, value, isInt = false) {
+    overrideDriverInfoAllOff() {
+      this.entryList.entries.forEach(entry => {
+        entry.overrideDriverInfo = 0;
+      })
+      let newList = cloneDeep(this.entryList)
+      this.entryList = newList
+    },
+    onPropertyChange(entry, key, value, isInt = false) {
       // Before processing, apply some quick field validation
       if (key === 'raceNumber' && (value === '' || value === '0' || value < -1 || value > 998))
-        value = -1 
+        value = -1
       if (key === 'defaultGridPosition' && (value === '' || value === '0' || value < 1))
         value = null
       if (key === 'ballastKg' && (value === '' || value < 0 || value > 100))
@@ -572,8 +421,8 @@ export default {
       if (key === 'restrictor' && (value === '' || value < 0 || value > 20))
         value = null
       if (key === 'overrideDriverInfo' && this.overrideDriverInfoLocked)
-      return;
-      
+        return;
+
       // Clone existing entry list
       let newList = cloneDeep(this.entryList)
       // Find entry we want to modify
@@ -583,14 +432,14 @@ export default {
       // Amend entry
       if (value === null)
         delete newList.entries[index][key]
-      else if (isInt) 
+      else if (isInt)
         newList.entries[index][key] = parseInt(value)
       else
         newList.entries[index][key] = value
       // Update the existing entry list
       this.entryList = newList
     },
-    onDriverPropertyChange (driver, entry, key, value, isInt = false) {
+    onDriverPropertyChange(driver, entry, key, value, isInt = false) {
       // Before processing, apply some quick field validation
       if (key === 'playerID' && (!value.startsWith('S')))
         value = 'S' + value
@@ -608,14 +457,14 @@ export default {
       // Amend driver inside entry
       if (value === null)
         delete newList.entries[index].drivers[dindex][key]
-      else if (isInt) 
+      else if (isInt)
         newList.entries[index].drivers[dindex][key] = parseInt(value)
       else
         newList.entries[index].drivers[dindex][key] = value
       // Update the existing entry list
       this.entryList = newList
     },
-    addDriver (entry) {
+    addDriver(entry) {
       // Clone existing entry list
       let newList = cloneDeep(this.entryList)
       // Find entry we want to modify
@@ -647,7 +496,7 @@ export default {
       // Update the existing entry list
       this.entryList = newList
     },
-    deleteDriver (driver, entry) {
+    deleteDriver(driver, entry) {
       // Clone existing entry list
       let newList = cloneDeep(this.entryList)
       // Find entry we want to modify
@@ -663,7 +512,7 @@ export default {
       // Update the existing entry list
       this.entryList = newList
     },
-    swapDriver (index1, index2, entry) {
+    swapDriver(index1, index2, entry) {
       // Clone existing entry list
       let newList = cloneDeep(this.entryList)
       // Find entry we want to modify
@@ -677,7 +526,7 @@ export default {
       // Update the existing entry list
       this.entryList = newList
     },
-    toggleForceEntryList (value) {
+    toggleForceEntryList(value) {
       // Clone existing entry list
       let newList = cloneDeep(this.entryList)
       // Toggle forceEntryList
@@ -685,17 +534,17 @@ export default {
       // Update the existing entry list
       this.entryList = newList
     },
-    getHash (obj) {
+    getHash(obj) {
       return hash(obj)
     }
   },
   watch: {
-    entryList (val) {
+    entryList(val) {
       if (val !== null && val !== undefined) {
         this.entryListText = JSON.stringify(val, null, 2)
       }
     },
-    entryListText (val) {
+    entryListText(val) {
       try {
         this.entryList = JSON.parse(val)
         this.jsonError = null
@@ -708,8 +557,8 @@ export default {
 }
 </script>
 <style scoped>
-.collapsed > .when-open,
-.not-collapsed > .when-closed {
+.collapsed>.when-open,
+.not-collapsed>.when-closed {
   display: none;
 }
 </style>
