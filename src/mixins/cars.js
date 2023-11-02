@@ -161,15 +161,15 @@ export default {
           class: 'gt3'
         },
         27: {
-          name: 'BMW M2 Club Sport Racing',
-          year: 2022,
-          class: 'tcx',
-          dlc: 'Challengers Pack'
-        },
-        28: {
           name: 'Porsche 992 GT3 Cup',
           year: 2022,
           class: 'gtc',
+          dlc: 'Challengers Pack'
+        },
+        28: {
+          name: 'BMW M2 Club Sport Racing',
+          year: 2022,
+          class: 'tcx',
           dlc: 'Challengers Pack'
         },
         29: {
