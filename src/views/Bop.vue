@@ -91,8 +91,8 @@
                   prepend="Ballast (kg)">
                   <b-input
                     type="number"
-                    min="0"
-                    max="100"
+                    min="-40"
+                    max="40"
                     :value="data.item.ballast" 
                     @change="onPropertyChange(data.item, 'ballast', $event, true)" />
                   <b-input-group-append>
