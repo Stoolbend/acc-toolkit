@@ -8,7 +8,14 @@
         License
       </b-link>
       <div class="d-flex flex-row align-items-center">
-        Made with ❤ by 
+        Console version adapted by
+        <b-link 
+          class="ml-1 mr-1"
+          href="https://github.com/kourousis" 
+          target="_blank">
+          washamga
+        </b-link>
+        || Made with ❤ by 
         <b-link 
           class="ml-1 mr-1"
           href="https://github.com/Stoolbend" 
