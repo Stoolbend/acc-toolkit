@@ -2,10 +2,10 @@
   <div>
     <div class="container">
       <h3>
-        Wazzzzaaaa to GHR ACC Toolkit mi GENTEEEE
+        ACC Toolkit - Console Edition
       </h3>
       <p>
-        GHR the goat, fuck xLc
+        Updated Car IDs to Match the Console version of ACC
       </p>
     </div>
     <div class="row justify-content-center align-items-middle w-100">
