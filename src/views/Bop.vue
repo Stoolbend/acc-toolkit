@@ -91,8 +91,8 @@
                   prepend="Ballast (kg)">
                   <b-input
                     type="number"
-                    min="0"
-                    max="100"
+                    min="-40"
+                    max="40"
                     :value="data.item.ballast" 
                     @change="onPropertyChange(data.item, 'ballast', $event, true)" />
                   <b-input-group-append>
@@ -288,7 +288,7 @@ export default {
     },
     onPropertyChange (entry, key, value, isInt = false) {
       // Before processing, apply some quick field validation
-      if (key === 'ballast' && (value === '' || value < 0 || value > 100))
+      if (key === 'ballast' && (value === '' || value < -40 || value > 40))
         value = null
       if (key === 'restrictor' && (value === '' || value < 0 || value > 20))
         value = null
