@@ -52,25 +52,6 @@
         </b-link>
       </div>
       <div class="col-lg-3 col-md-6 col-12 d-flex flex-column align-items-center pb-3">
-        <b-link :to="{ name: 'LFMBop' }">
-          <b-card 
-            no-body 
-            class="d-flex flex-column align-items-center p-3">
-            <b-icon
-              icon="speedometer2"
-              font-scale="3" />
-            <div>
-              LFM BoP
-            </div>
-            <div class="text-danger">
-              <small>
-                Coming soon...
-              </small>
-            </div>
-          </b-card>
-        </b-link>
-      </div>
-      <div class="col-lg-3 col-md-6 col-12 d-flex flex-column align-items-center pb-3">
         <b-link :to="{name: 'Event'}">
           <b-card 
             no-body 
