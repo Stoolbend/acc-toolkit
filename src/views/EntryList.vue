@@ -43,7 +43,7 @@
                       </b-input-group>
                     </div>
                     <div class="d-flex flex-row pb-1">
-                      <b-input-group size="sm" prepend="Steam ID">
+                      <b-input-group size="sm" prepend="Xbox ID">
                         <b-input type="text" :value="driver.playerID" @change="onDriverPropertyChange(driver, data.item, 'playerID', $event)" />
                       </b-input-group>
                     </div>
@@ -64,7 +64,7 @@
                       <div v-if="!driver.playerID" class="d-flex flex-row align-items-center pt-1">
                         <b-icon icon="exclamation-triangle-fill" variant="danger" font-scale="1.2" class="mr-2" />
                         <small>
-                          Steam ID is empty
+                          Xbox ID is empty
                         </small>
                       </div>
                       <div v-if="!data.item.overrideDriverInfo" class="d-flex flex-row align-items-center pt-1">
