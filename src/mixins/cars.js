@@ -161,7 +161,7 @@ export default {
           class: 'gt3'
         },
         27: {
-          name: 'Porsche 992 GT3 Cup',
+          name: 'Ferrari 488 Challenge Evo',
           year: 2022,
           class: 'gtc',
           dlc: 'Challengers Pack'
@@ -173,13 +173,13 @@ export default {
           dlc: 'Challengers Pack'
         },
         29: {
-          name: 'Lamborghini Huracán SuperTrofeo EVO2',
-          year: 2022,
+          name: 'Porsche 992 GT3 Cup',
+          year: 2023,
           class: 'gtc',
           dlc: 'Challengers Pack'
         },
         30: {
-          name: 'Ferrari 488 Challenge Evo',
+          name: 'Lamborghini Huracán SuperTrofeo EVO2',
           year: 2022,
           class: 'gtc',
           dlc: 'Challengers Pack'

@@ -2,13 +2,10 @@
   <div>
     <div class="container">
       <h3>
-        Welcome to ACC Toolkit
+        Wazzzzaaaa to GHR ACC Toolkit mi GENTEEEE
       </h3>
       <p>
-        Here are some useful tools to assist with preparing config files for Assetto Corsa Competizione servers.
-      </p>
-      <p>
-        If you have any issues or suggestions, then please let me know using the <b>Report an issue</b> button in the menu above.
+        GHR the goat, fuck xLc
       </p>
     </div>
     <div class="row justify-content-center align-items-middle w-100">
