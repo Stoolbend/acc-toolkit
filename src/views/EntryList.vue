@@ -56,6 +56,12 @@
                           <b-icon icon="arrow-down" />
                         </b-button>
                       </b-button-group>
+                      <b-button variant="" size="sm" v-b-tooltip.hover title="Find an Xbox ID" @click="openNewTab('https://cxkes.me/xbox/xuid')">
+                        Find an Xbox ID
+                      </b-button>
+                      <b-button variant="" size="sm" v-b-tooltip.hover title="Find a Playstation ID" @click="openNewTab('https://psn.flipscreen.games/')">
+                        Find a PlayStation ID
+                      </b-button>
                       <b-button variant="danger" size="sm" v-b-tooltip.hover title="Delete driver" @click="deleteDriver(driver, data.item)">
                         <b-icon icon="trash-fill" />
                       </b-button>
@@ -315,6 +321,9 @@ export default {
     this.carSelectSettings.showNoCar = true
   },
   methods: {
+    openNewTab(url) {
+      window.open(url, '_blank');
+    },
     dragFile(e) {
       let files = e.dataTransfer.files;
       let file = files[0];
