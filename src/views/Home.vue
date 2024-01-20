@@ -9,7 +9,7 @@
       </h5>
       <ul>
         <li>Updated bop.json carModel to match the Console version of ACC</li>
-        <li>Updated entrylist.json playerId to Xbox prefix "M"</li>
+        <li>Updated entrylist.json playerId to automatically detect ID used and add appropriate prefix "M" or "P"</li>
         <li>Updated BoP range of -40kg to +40kg</li>
       </ul>
     </div>
