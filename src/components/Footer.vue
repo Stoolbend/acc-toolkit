@@ -8,14 +8,7 @@
         License
       </b-link>
       <div class="d-flex flex-row align-items-center">
-        Console version adapted by
-        <b-link 
-          class="ml-1 mr-1"
-          href="https://github.com/kourousis" 
-          target="_blank">
-          washamga
-        </b-link>
-        || Made with ❤ by 
+        Made with ❤ by 
         <b-link 
           class="ml-1 mr-1"
           href="https://github.com/Stoolbend" 
@@ -24,10 +17,17 @@
         </b-link>
         &amp;
         <b-link
-          class="ml-1"
+          class="ml-1 mr-1"
           href="https://github.com/Stoolbend/acc-toolkit/graphs/contributors"
           target="_blank">
-          friends
+          friends 
+        </b-link>
+        || Console version adapted by
+        <b-link 
+          class="ml-1 mr-1"
+          href="https://github.com/kourousis" 
+          target="_blank">
+          washamga
         </b-link>
       </div>
     </div>

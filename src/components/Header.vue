@@ -39,20 +39,20 @@
 
       <b-navbar-nav class="ml-auto">
         <b-nav-item 
-          href="https://github.com/kourousis/acc-toolkit/tree/xbox-version"
+          href="https://github.com/Stoolbend/acc-toolkit"
           target="_blank">
           <div class="d-flex flex-row align-items-center">
-            View Console ACC Toolkit on GitHub
+            View Original ACC Toolkit on GitHub
             <b-icon
               icon="github"
               class="ml-1"/>
           </div>
         </b-nav-item>
         <b-nav-item 
-          href="https://github.com/Stoolbend/acc-toolkit"
+          href="https://github.com/kourousis/acc-toolkit/tree/xbox-version"
           target="_blank">
           <div class="d-flex flex-row align-items-center">
-            View Original ACC Toolkit on GitHub
+            View Console ACC Toolkit on GitHub
             <b-icon
               icon="github"
               class="ml-1"/>

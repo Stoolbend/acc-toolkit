@@ -4,13 +4,14 @@
       <h3>
         ACC Toolkit - Console Edition
       </h3>
-      <p>
-        Updated Car IDs to Match the Console version of ACC
-      </p>
-
-      <p>
-        Updated BoP range of -40kg to +40kg
-      </p>
+      <h5>
+        Updates and Fixes
+      </h5>
+      <ul>
+        <li>Updated bop.json carModel to match the Console version of ACC</li>
+        <li>Updated entrylist.json playerId to Xbox prefix "M"</li>
+        <li>Updated BoP range of -40kg to +40kg</li>
+      </ul>
     </div>
     <div class="row justify-content-center align-items-middle w-100">
       <div class="col-lg-3 col-md-6 col-12 d-flex flex-column align-items-center pb-3">
