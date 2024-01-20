@@ -442,7 +442,7 @@ export default {
     onDriverPropertyChange(driver, entry, key, value, isInt = false) {
       // Before processing, apply some quick field validation
       if (key === 'playerID' && (!value.startsWith('S')))
-        value = 'S' + value
+        value = 'M' + value
 
       // Clone existing entry list
       let newList = cloneDeep(this.entryList)
