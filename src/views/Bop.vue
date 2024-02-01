@@ -69,7 +69,7 @@
                   </small>
                 </div>
                 <div 
-                  v-if="!data.item.ballast && !data.item.restrictor"
+                  v-if="!data.item.ballastKg && !data.item.restrictor"
                   class="d-flex flex-row align-items-center pt-1">
                   <b-icon 
                     icon="info-circle"
@@ -93,13 +93,13 @@
                     type="number"
                     min="-40"
                     max="40"
-                    :value="data.item.ballast" 
-                    @change="onPropertyChange(data.item, 'ballast', $event, true)" />
+                    :value="data.item.ballastKg" 
+                    @change="onPropertyChange(data.item, 'ballastKg', $event, true)" />
                   <b-input-group-append>
                     <b-button 
-                      v-if="data.item.ballast"
+                      v-if="data.item.ballastKg"
                       variant="secondary"
-                      @click="onPropertyChange(data.item, 'ballast', null, true)">
+                      @click="onPropertyChange(data.item, 'ballastKg', null, true)">
                       Remove
                     </b-button>
                   </b-input-group-append>
@@ -288,7 +288,7 @@ export default {
     },
     onPropertyChange (entry, key, value, isInt = false) {
       // Before processing, apply some quick field validation
-      if (key === 'ballast' && (value === '' || value < -40 || value > 40))
+      if (key === 'ballastKg' && (value === '' || value < -40 || value > 40))
         value = null
       if (key === 'restrictor' && (value === '' || value < 0 || value > 20))
         value = null
