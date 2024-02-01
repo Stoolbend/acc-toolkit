@@ -10,8 +10,8 @@ export default defineConfig({
   plugins: [
     vue(),
     Components({
-      resolvers: [BootstrapVueNextResolver()],
-    }),
+      resolvers: [BootstrapVueNextResolver()]
+    })
   ],
   resolve: {
     alias: {

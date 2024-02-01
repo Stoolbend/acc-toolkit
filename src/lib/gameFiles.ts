@@ -15,18 +15,18 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 //#region eventRules.json
-export interface EventRules {
-  qualifyStandingType: number
-  pitWindowLengthSec: number
-  driverStintTimeSec: number
-  mandatoryPitstopCount: number
-  maxTotalDrivingTime: number
-  maxDriversCount: number
-  isRefuellingAllowedInRace: boolean
-  isRefuellingTimeFixed: boolean
-  isMandatoryPitstopRefuellingRequired: boolean
-  isMandatoryPitstopTyreChangeRequired: boolean
-  isMandatoryPitstopSwapDriverRequired: boolean
-  tyreSetCount: number
+export class EventRules {
+  qualifyStandingType: number = 1
+  pitWindowLengthSec: number = -1
+  driverStintTimeSec: number = -1
+  mandatoryPitstopCount: number = 0
+  maxTotalDrivingTime: number = -1
+  maxDriversCount: number = 1
+  isRefuellingAllowedInRace: boolean = true
+  isRefuellingTimeFixed: boolean = false
+  isMandatoryPitstopRefuellingRequired: boolean = false
+  isMandatoryPitstopTyreChangeRequired: boolean = false
+  isMandatoryPitstopSwapDriverRequired: boolean = false
+  tyreSetCount: number = 50
 }
 //#endregion

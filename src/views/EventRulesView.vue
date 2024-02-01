@@ -17,32 +17,27 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import FilePicker from '@/components/FilePicker.vue';
-import { type EventRules } from '@/lib/gameFiles';
+import { EventRules } from '@/lib/gameFiles';
 import { ref } from 'vue';
 
-const file = ref<EventRules>();
-const defaultFile = {
-  qualifyStandingType: 1,
-  pitWindowLengthSec: -1,
-  driverStintTimeSec: -1,
-  mandatoryPitstopCount: 0,
-  maxTotalDrivingTime: -1,
-  maxDriversCount: 1,
-  isRefuellingAllowedInRace: true,
-  isRefuellingTimeFixed: false,
-  isMandatoryPitstopRefuellingRequired: false,
-  isMandatoryPitstopTyreChangeRequired: false,
-  isMandatoryPitstopSwapDriverRequired: false,
-  tyreSetCount: 50,
-};
+const data = ref<EventRules>();
 </script>
 
 <template>
   <main>
     <div class="container">
       <h3>Event Rules Editor</h3>
+      <b-form v-if="data">
+        <b-form-group
+          label="Qualifying type">
+          <b-form-select v-model="data.qualifyStandingType">
+            <b-form-select-option :value="1">Fastest lap</b-form-select-option>
+            <b-form-select-option :value="2">Average lap <strong>(Not supported)</strong></b-form-select-option>
+          </b-form-select>
+        </b-form-group>
+      </b-form>
       <hr />
-      <FilePicker file-name="eventRules.json" :default="defaultFile" />
+      <FilePicker v-model="data" file-name="eventRules" :default="new EventRules()" />
     </div>
   </main>
 </template>

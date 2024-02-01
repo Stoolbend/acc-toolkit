@@ -1,6 +1,6 @@
-<script setup lang="ts">
+<script setup lang="ts" generic="T">
 /*
-Copyright (C) 2023 Conor Morgan
+Copyright (C) 2024 Conor Morgan
 This file is part of ACC Tooklit, which is free software: you can 
 redistribute it and/or modify it under the terms of the 
 GNU General Public License as published by the Free Software Foundation,
@@ -14,35 +14,31 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
+import download from "downloadjs";
 import { cloneDeep } from "lodash-es";
 import { ref, watch } from "vue";
 
 const props = defineProps<{
   fileName: string,
-  default: object
-}>();
-const emit = defineEmits<{
-  (e: "updated", file: any): void
+  default?: T
 }>();
 
 const jsonError = ref<string>();
 
 //#region File parsing
+const file = defineModel<T>();
 const fileText = ref<string>();
-const file = ref<any>();
 
-watch(
-  () => file,
-  () => {
-    try {
-      if (file !== undefined && file !== null)
-        fileText.value = JSON.stringify(file, null, 2);
-      else
-        fileText.value = undefined;
-    } catch (e: any) {
-      jsonError.value = e.message;
-    }
-  });
+watch(file, (value) => {
+  try {
+    if (value !== undefined && value !== null)
+      fileText.value = JSON.stringify(value, null, 2);
+    else
+      fileText.value = undefined;
+  } catch (e: any) {
+    jsonError.value = e.message;
+  }
+}, { deep: true });
 watch(fileText, (newValue) => {
   try {
     if (newValue) file.value = JSON.parse(newValue)
@@ -58,7 +54,8 @@ function onNew() {
 }
 
 function downloadFile() {
-  return;
+  if (fileText.value)
+    download(fileText.value, `${props.fileName}.json`, "application/json");
 }
 </script>
 
