@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2021 Conor Morgan
+Copyright (C) 2023 Conor Morgan
 This file is part of ACC Tooklit, which is free software: you can 
 redistribute it and/or modify it under the terms of the 
 GNU General Public License as published by the Free Software Foundation,
@@ -14,34 +14,20 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-export default {
-  data () {
-    return {
-      sessionTypeData: {
-        0: {
-          name: 'Practice'
-        },
-        4: {
-          name: 'Qualifying'
-        },
-        10: {
-          name: 'Race'
-        }
-      }
-    }
-  },
-  computed: {
-    sessionTypeSelectOptions () {
-      let options = []
-      if (this.sessionTypeData) {
-        for (let key in this.sessionTypeData) {
-          options.push({
-            value: parseInt(key),
-            text: this.sessionTypeData[key].name
-          })
-        }
-      }
-      return options
-    }
-  }
-}
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
+
+import App from './App.vue'
+import router from './router'
+
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue-next/dist/bootstrap-vue-next.css'
+import 'bootstrap-icons/font/bootstrap-icons.css'
+import '@/assets/global.css'
+
+const app = createApp(App)
+
+app.use(createPinia())
+app.use(router)
+
+app.mount('#app')
