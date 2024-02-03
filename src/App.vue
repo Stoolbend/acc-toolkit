@@ -16,6 +16,27 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import { RouterView } from 'vue-router'
+import { useSettingsStore, Platform } from './stores/settings';
+import { ref } from 'vue';
+import { computed } from 'vue';
+
+const settings = useSettingsStore();
+
+// Platform selector
+const selectedPlatform = ref(settings.platform);
+const selectedPlatformClass = computed(() => {
+  switch (selectedPlatform.value) {
+    case Platform.Steam:
+      return 'steam';
+    case Platform.Xbox:
+      return 'xbox';
+    case Platform.PlayStation:
+      return 'playstation';
+  }
+});
+function onPlatformChanged(value: unknown) {
+  settings.setPlatform(value as Platform);
+}
 </script>
 
 <template>
@@ -25,7 +46,14 @@ import { RouterView } from 'vue-router'
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
     <b-collapse id="nav-collapse" is-nav>
-      <b-navbar-nav>
+      <b-navbar-nav class="align-items-lg-center">
+        <li class="nav-item">
+          <b-form-select v-model="selectedPlatform" size="sm" :class="`platform-select ${selectedPlatformClass}`" @update:model-value="onPlatformChanged">
+            <b-form-select-option :value="Platform.Steam" class="steam"><i class="bi bi-steam me-1" />Steam</b-form-select-option>
+            <b-form-select-option :value="Platform.Xbox" class="xbox"><i class="bi bi-xbox me-1" />Xbox</b-form-select-option>
+            <b-form-select-option :value="Platform.PlayStation" class="playstation"><i class="bi bi-playstation me-1" />PlayStation</b-form-select-option>
+          </b-form-select>
+        </li>
         <b-nav-item :to="{ name: 'entrylist' }">
           <div class="d-flex flex-row align-items-center">Entry List Editor</div>
         </b-nav-item>
@@ -77,7 +105,7 @@ import { RouterView } from 'vue-router'
   </footer>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 footer {
   display: flex;
   flex-direction: row;
@@ -88,5 +116,20 @@ footer {
 footer:deep(a) {
   text-decoration: none;
   ;
+}
+
+.steam {
+  background-color: #1b2838;
+  color: white;
+}
+
+.xbox {
+  background-color: #107c10;
+  color: white;
+}
+
+.playstation {
+  background-color: #003087;
+  color: white;
 }
 </style>
