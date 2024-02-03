@@ -1,0 +1,27 @@
+body {
+  background-color: var(--bs-light);
+}
+
+/* #region Links */
+a {
+  text-decoration: none;
+}
+.wiki-link {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  margin-bottom: 1em;
+}
+/* #endregion */
+
+/* #region Forms */
+fieldset {
+  div.row {
+    div.col {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+}
+/* #endregion */
