@@ -60,7 +60,7 @@ import { RouterView } from 'vue-router'
     </b-collapse>
   </b-navbar>
   <RouterView />
-  <footer class="fixed-bottom bg-light">
+  <footer class="bg-light">
     <a class="text-sm" href="https://github.com/Stoolbend/acc-toolkit/blob/master/LICENSE" target="_blank">
       License
     </a>
@@ -84,7 +84,9 @@ footer {
   justify-content: space-between;
   margin: 0 0.5em 0.5em 0.5em;
 }
+
 footer:deep(a) {
-  text-decoration: none;;
+  text-decoration: none;
+  ;
 }
 </style>

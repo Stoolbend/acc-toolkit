@@ -1,5 +1,15 @@
-body {
+body,
+div#app {
   background-color: var(--bs-light);
+  height: 100vh;
+}
+div#app {
+  display: flex;
+  flex-direction: column;
+
+  main {
+    flex: 1;
+  }
 }
 
 /* #region Links */
