@@ -22,6 +22,7 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v2.4.0
         with:
+          version: latest
           # If specified, run `pnpm install`
           run_install: true
       - name: Build
