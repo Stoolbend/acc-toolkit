@@ -1,7 +1,9 @@
 <template>
   <div class="form-item-info">
     <i class="bi bi-info-circle-fill" />
-    <slot />
+    <div class="content">
+      <slot />
+    </div>
   </div>
 </template>
 <style scoped lang="scss">
@@ -17,6 +19,11 @@
 
   i {
     margin-right: 0.5em;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
   }
 }
 </style>

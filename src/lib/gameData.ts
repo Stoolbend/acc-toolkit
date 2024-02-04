@@ -604,3 +604,19 @@ export const Tracks = [
   }
 ] as Track[]
 //#endregion Tracks
+
+//#region Settings
+export enum SettingsCarGroup {
+  FreeForAll = 'FreeForAll',
+  GT3 = 'GT3',
+  GT4 = 'GT4',
+  GTC = 'GTC'
+}
+export enum SettingsFormationLapType {
+  Free = 0,
+  OldLimiterLap = 1,
+  Default = 3,
+  OneLap = 4,
+  Short = 5
+}
+//#endregion

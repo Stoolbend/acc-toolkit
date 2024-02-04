@@ -14,6 +14,8 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { SettingsCarGroup, SettingsFormationLapType } from './gameData'
+
 //#region eventRules.json
 export class EventRules {
   qualifyStandingType: number = 1
@@ -28,5 +30,28 @@ export class EventRules {
   isMandatoryPitstopTyreChangeRequired: boolean = false
   isMandatoryPitstopSwapDriverRequired: boolean = false
   tyreSetCount: number = 50
+}
+//#endregion
+
+//#region settings.json
+export class Settings {
+  serverName: string = 'My race server'
+  adminPassword: string = 'letmeadmin'
+  password: string = ''
+  spectatorPassword: string = ''
+  carGroup: SettingsCarGroup = SettingsCarGroup.FreeForAll
+  trackMedalsRequirement: number = 3
+  safetyRatingRequirement: number = 49
+  racecraftRatingRequirement: number = -1
+  maxCarSlots: number = 30
+  allowAutoDQ: 0 | 1 = 1
+  isRaceLocked: 0 | 1 = 0
+  shortFormationLap: 0 | 1 = 0
+  formationLapType: SettingsFormationLapType = SettingsFormationLapType.Default
+  randomizeTrackWhenEmpty: 0 | 1 = 0
+  centralEntryListPath: string = ''
+  ignorePrematureDisconnects: 0 | 1 = 1
+  dumpEntryList: 0 | 1 = 0
+  dumpLeaderboards: 0 | 1 = 0
 }
 //#endregion

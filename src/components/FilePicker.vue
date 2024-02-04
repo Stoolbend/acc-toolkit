@@ -65,7 +65,7 @@ function downloadFile() {
       {{ jsonError }}
     </b-alert>
     <BFormTextarea v-model="fileText" rows="10" class="mb-2"
-      placeholder="Drag & Drop your eventRules.json or paste its contents here..." />
+      :placeholder="`Drag & Drop your ${fileName}.json or paste its contents here...`" />
     <div class="d-flex flex-row justify-content-center mb-1">
       <b-button variant="secondary" @click="onNew">
         New {{ fileName }}.json
