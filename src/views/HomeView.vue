@@ -20,10 +20,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
   <main>
     <div class="container">
       <h3>Welcome to ACC Toolkit</h3>
-      <p>
-        Here are some useful tools to assist with preparing config files for Assetto Corsa
-        Competizione servers.
-      </p>
+      <p>Here are some useful tools to assist with preparing config files for Assetto Corsa Competizione servers.</p>
       <p>
         If you have any issues or suggestions, then please let me know using the
         <b>Report an issue</b> button in the menu above.
@@ -43,7 +40,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
             <small> bop.json </small>
           </div>
         </router-link>
-        <router-link class="link-item card" :to="{ name: 'event' }">
+        <router-link class="link-item card" :to="{ name: 'event' }" disabled>
           <i class="bi bi-calendar-event-fill" />
           <div>Event Editor</div>
           <div>
@@ -94,7 +91,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
   align-items: center;
   padding: 1em;
   text-decoration: none;
-  
+
   min-width: 140px;
 }
 
