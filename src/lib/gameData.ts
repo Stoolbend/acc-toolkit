@@ -37,7 +37,7 @@ export const SessionTypes = [
 //#endregion Session types
 
 //#region Cup categories
-export type CupCategory = {
+export type CupCategoryOption = {
   short: string
   colors: {
     text: string
@@ -45,10 +45,17 @@ export type CupCategory = {
     border: string
   }
 } & BasicType<number>
+export enum CupCategory {
+  Overall = 0,
+  ProAm = 1,
+  Am = 2,
+  Silver = 3,
+  National = 4
+}
 export const CupCategories = [
   {
     name: 'Overall',
-    value: 0,
+    value: CupCategory.Overall,
     short: 'PRO',
     colors: {
       text: '#000',
@@ -58,7 +65,7 @@ export const CupCategories = [
   },
   {
     name: 'Pro-Am',
-    value: 1,
+    value: CupCategory.ProAm,
     short: 'PRO-AM',
     colors: {
       text: '#fff',
@@ -68,7 +75,7 @@ export const CupCategories = [
   },
   {
     name: 'Am',
-    value: 2,
+    value: CupCategory.Am,
     short: 'AM',
     colors: {
       text: '#fff',
@@ -78,7 +85,7 @@ export const CupCategories = [
   },
   {
     name: 'Silver',
-    value: 3,
+    value: CupCategory.Silver,
     short: 'SILVER',
     colors: {
       text: '#fff',
@@ -88,7 +95,7 @@ export const CupCategories = [
   },
   {
     name: 'National',
-    value: 4,
+    value: CupCategory.National,
     short: 'NAT.',
     colors: {
       text: '#fff',
@@ -96,28 +103,34 @@ export const CupCategories = [
       border: '#fff'
     }
   }
-] as CupCategory[]
+] as CupCategoryOption[]
 //#endregion Cup categories
 
 //#region Driver categories
+export enum DriverCategory {
+  Bronze = 0,
+  Silver = 1,
+  Gold = 2,
+  Platinum = 3
+}
 export const DriverCategories = [
   {
     name: 'Bronze',
-    value: 0
+    value: DriverCategory.Bronze
   },
   {
     name: 'Silver',
-    value: 1
+    value: DriverCategory.Silver
   },
   {
     name: 'Gold',
-    value: 2
+    value: DriverCategory.Gold
   },
   {
     name: 'Platinum',
-    value: 3
+    value: DriverCategory.Platinum
   }
-] as BasicType<number>[]
+] as BasicType<DriverCategory>[]
 //#endregion Driver categories
 
 //#region DLC

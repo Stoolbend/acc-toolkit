@@ -14,7 +14,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { SettingsCarGroup, SettingsFormationLapType } from './gameData'
+import { DriverCategory, SettingsCarGroup, SettingsFormationLapType } from './gameData'
 
 //#region eventRules.json
 export class EventRules {
@@ -53,5 +53,35 @@ export class Settings {
   ignorePrematureDisconnects: 0 | 1 = 1
   dumpEntryList: 0 | 1 = 0
   dumpLeaderboards: 0 | 1 = 0
+}
+//#endregion
+
+//#region entryList.json
+export class EntryList {
+  entries: EntryListEntry[] = []
+  forceEntryList: 0 | 1 = 0
+}
+export type EntryListEntry = {
+  drivers: EntryListDriver[]
+  raceNumber: number
+  forcedCarModel: number
+  overrideDriverInfo: number
+  isServerAdmin: number
+  defaultGridPosition?: number
+  ballastKg?: number
+  restrictor?: number
+  customCar?: string
+  overrideCarModelForCustomCar?: number
+}
+export type EntryListDriver = {
+  playerID: string
+  firstName?: string
+  lastName?: string
+  shortName?: string
+  driverCategory?: DriverCategory
+}
+// Defaults
+export const EntryListDriverDefault: EntryListDriver = {
+  playerID: '',
 }
 //#endregion

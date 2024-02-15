@@ -2,6 +2,14 @@ body,
 div#app {
   background-color: var(--bs-light);
   height: 100vh;
+
+  /* Platform colour variables */
+  --platform-steam-background: #1b2838;
+  --platform-steam-text: white;
+  --platform-xbox-background: #107c10;
+  --platform-xbox-text: white;
+  --platform-playstation-background: #003087;
+  --platform-playstation-text: white;
 }
 div#app {
   display: flex;
@@ -42,15 +50,34 @@ fieldset {
   }
 }
 select.steam {
-  background-color: #1b2838;
-  color: white;
+  background-color: var(--platform-steam-background);
+  color: var(--platform-steam-text);
 }
 select.xbox {
-  background-color: #107c10;
-  color: white;
+  background-color: var(--platform-xbox-background);
+  color: var(--platform-xbox-text);
 }
 select.playstation {
-  background-color: #003087;
-  color: white;
+  background-color: var(--platform-playstation-background);
+  color: var(--platform-playstation-text);
+}
+/* #endregion */
+
+/* #region Badges */
+.platform-badge {
+  border-radius: 8px;
+  padding: 0.25em 0.5em;
+}
+.platform-badge.steam {
+  background-color: var(--platform-steam-background);
+  color: var(--platform-steam-text);
+}
+.platform-badge.xbox {
+  background-color: var(--platform-xbox-background);
+  color: var(--platform-xbox-text);
+}
+.platform-badge.playstation {
+  background-color: var(--platform-playstation-background);
+  color: var(--platform-playstation-text);
 }
 /* #endregion */

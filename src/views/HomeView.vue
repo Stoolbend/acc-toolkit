@@ -61,6 +61,11 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
             <small> settings.json </small>
           </div>
         </router-link>
+        <router-link class="link-item card" :to="{ name: 'drivers' }">
+          <i class="bi bi-person-arms-up" />
+          <div>Saved Drivers</div>
+          <div>&nbsp;</div>
+        </router-link>
         <div class="link-item card text-muted">
           <i class="bi bi-car-front-fill" />
           <div>Custom Car Editor</div>

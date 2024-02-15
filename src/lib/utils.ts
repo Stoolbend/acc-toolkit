@@ -14,10 +14,13 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { Platform } from '@/stores/settings'
+import type { EntryListEntry } from './gameFiles'
+
 export function isNullOrWhitespace(input: string | null | undefined) {
   return !input || !input.trim()
 }
-export function getNextAvailableCarNumber(entries: any[]) {
+export function getNextAvailableCarNumber(entries: { raceNumber: number }[]) {
   // Check if the entry list is set & has any entries to check
   // if it's not, then just return 1.
   if (!entries || !Array.isArray(entries)) return 1
@@ -48,4 +51,35 @@ export function randomString(length: number = 6) {
   let result = ''
   for (let i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)]
   return result
+}
+export function parsePlayerId(playerId: string) {
+  let platform = Platform.Steam
+  if (playerId.startsWith('S')) platform = Platform.Steam
+  else if (playerId.startsWith('M')) platform = Platform.Xbox
+  else if (playerId.startsWith('P')) platform = Platform.PlayStation
+
+  return {
+    platform,
+    playerId: playerId.slice(1),
+  }
+}
+export function formatPlayerId(playerId: string, platform: Platform) {
+  switch (platform) {
+    case Platform.Steam:
+      return `S${playerId}`
+    case Platform.Xbox:
+      return `M${playerId}`
+    case Platform.PlayStation:
+      return `P${playerId}`
+  }
+}
+export function getPlatformClass(platform: Platform) {
+  switch (platform) {
+    case Platform.Steam:
+      return 'steam'
+    case Platform.Xbox:
+      return 'xbox'
+    case Platform.PlayStation:
+      return 'playstation'
+  }
 }

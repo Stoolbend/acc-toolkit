@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
+import DriversView from '@/views/DriversView.vue'
+import EntryListView from '@/views/EntryListView.vue'
 import EventRulesView from '@/views/EventRulesView.vue'
 import SettingsView from '@/views/SettingsView.vue'
 
@@ -12,9 +14,14 @@ const router = createRouter({
       component: HomeView
     },
     {
+      path: '/drivers',
+      name: 'drivers',
+      component: DriversView
+    },
+    {
       path: '/entrylist',
       name: 'entrylist',
-      component: HomeView
+      component: EntryListView
     },
     {
       path: '/bop',
