@@ -16,6 +16,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import { RouterView } from 'vue-router'
+import { ModalsContainer } from 'vue-final-modal'
 </script>
 
 <template>
@@ -72,7 +73,7 @@ import { RouterView } from 'vue-router'
       <a class="ms-1" href="https://github.com/Stoolbend/acc-toolkit/graphs/contributors" target="_blank"> friends </a>
     </div>
   </footer>
-  <b-modal-orchestrator />
+  <ModalsContainer />
 </template>
 
 <style scoped lang="scss">

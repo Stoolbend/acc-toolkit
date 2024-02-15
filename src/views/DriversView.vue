@@ -15,6 +15,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import DriverEditModal from '@/components/DriverEditModal.vue'
 import { type EntryListDriver } from '@/lib/gameFiles'
 import { getPlatformClass, parsePlayerId } from '@/lib/utils'
 import { useDriverStore } from '@/stores/drivers'
@@ -22,6 +23,7 @@ import { Platform, PlatformOptions } from '@/stores/settings'
 import { watchEffect } from 'vue'
 import { watch } from 'vue'
 import { computed, ref } from 'vue'
+import { useModal } from 'vue-final-modal'
 
 const driverStore = useDriverStore()
 
@@ -36,26 +38,40 @@ watch(defaultPlatform, (value) => {
 })
 //#endregion
 
-const selectedDriver = ref<EntryListDriver>()
-const showDriverModal = ref(false)
-
-function addDriver() {
-  selectedDriver.value = undefined
-  showDriverModal.value = true
+async function addDriver() {
+  const { close } = useModal({
+    defaultModelValue: true,
+    component: DriverEditModal,
+    attrs: {
+      driver: undefined,
+      onSubmit(driver: EntryListDriver) {
+        driverStore.addDriver(driver)
+        close()
+      },
+      onClose() {
+        close()
+      },
+    },
+  })
 }
 function editDriver(driver: EntryListDriver) {
-  selectedDriver.value = driver
-  showDriverModal.value = true
+  const { close } = useModal({
+    defaultModelValue: true,
+    component: DriverEditModal,
+    attrs: {
+      driver: driver,
+      onSubmit(driver: EntryListDriver) {
+        driverStore.updateDriver(driver)
+        close()
+      },
+      onClose() {
+        close()
+      },
+    },
+  })
 }
 function deleteDriver(driver: EntryListDriver) {
   driverStore.deleteDriver(driver.playerID)
-}
-function onModalSubmit(driver: EntryListDriver) {
-  if (selectedDriver.value) {
-    driverStore.updateDriver(driver)
-  } else {
-    driverStore.addDriver(driver)
-  }
 }
 
 const tableFields = ['shortName', 'firstName', 'lastName', 'playerID', 'options', 'controls']
@@ -93,7 +109,6 @@ const tableFields = ['shortName', 'firstName', 'lastName', 'playerID', 'options'
         </template>
       </b-table>
     </div>
-    <DriverEditModal v-model="showDriverModal" :driver="selectedDriver" :defaultPlatform="defaultPlatform" @submit="onModalSubmit" />
   </main>
 </template>
 

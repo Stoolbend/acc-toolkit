@@ -20,16 +20,22 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 
+// bootstrap-vue-next
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue-next/dist/bootstrap-vue-next.css'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import '@/assets/global.scss'
 import createBootstrap from 'bootstrap-vue-next'
 
+// vue-final-modal
+import 'vue-final-modal/style.css'
+import { createVfm } from 'vue-final-modal'
+
 const app = createApp(App)
 
 app.use(createPinia())
 app.use(createBootstrap())
+app.use(createVfm())
 app.use(router)
 
 app.mount('#app')
