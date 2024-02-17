@@ -12,6 +12,11 @@ export const PlatformOptions = [
   { value: Platform.Xbox, text: 'Xbox' },
   { value: Platform.PlayStation, text: 'PlayStation' },
 ] as SelectOption[]
+export const PlatformOptionsSmall = [
+  { value: Platform.Steam, text: 'S' },
+  { value: Platform.Xbox, text: 'X' },
+  { value: Platform.PlayStation, text: 'PS' },
+] as SelectOption[]
 
 export const useSettingsStore = defineStore('settings', () => {
   // #region Platform

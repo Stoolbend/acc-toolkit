@@ -14,7 +14,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { CupCategories, DriverCategories, SessionTypes } from '@/lib/gameData'
+import { Cars, CupCategories, DriverCategories, SessionTypes } from '@/lib/gameData'
 
 export function useGameData() {
   //#region Session types
@@ -23,7 +23,7 @@ export function useGameData() {
     for (const item of SessionTypes) {
       result.push({
         text: item.name,
-        value: item.value
+        value: item.value,
       })
     }
     return result
@@ -36,7 +36,7 @@ export function useGameData() {
     for (const item of CupCategories) {
       result.push({
         text: item.name,
-        value: item.value
+        value: item.value,
       })
     }
     return result
@@ -49,7 +49,7 @@ export function useGameData() {
     for (const item of DriverCategories) {
       result.push({
         text: item.name,
-        value: item.value
+        value: item.value,
       })
     }
     return result
@@ -57,10 +57,25 @@ export function useGameData() {
   //#endregion Driver categories
 
   //#region Cars
+  function carOptions() {
+    const result = [
+      {
+        text: 'Any car',
+        value: -1,
+      },
+    ]
+    for (const item of Cars) {
+      result.push({
+        text: item.name,
+        value: item.value,
+      })
+    }
+    return result
+  }
   //#endregion Cars
 
   //#region Tracks
   //#endregion Tracks
 
-  return { sessionTypeOptions, cupCategoryOptions, driverCategoryOptions }
+  return { sessionTypeOptions, cupCategoryOptions, driverCategoryOptions, carOptions }
 }

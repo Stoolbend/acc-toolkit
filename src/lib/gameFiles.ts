@@ -15,6 +15,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import { DriverCategory, SettingsCarGroup, SettingsFormationLapType } from './gameData'
+import { randomString } from './utils'
 
 //#region eventRules.json
 export class EventRules {
@@ -61,27 +62,23 @@ export class EntryList {
   entries: EntryListEntry[] = []
   forceEntryList: 0 | 1 = 0
 }
-export type EntryListEntry = {
-  drivers: EntryListDriver[]
-  raceNumber: number
-  forcedCarModel: number
-  overrideDriverInfo: number
-  isServerAdmin: number
+export class EntryListEntry {
+  drivers: EntryListDriver[] = []
+  raceNumber: number = 0
+  forcedCarModel: number = -1
+  overrideDriverInfo: number = 0
+  isServerAdmin: number = 0
   defaultGridPosition?: number
   ballastKg?: number
   restrictor?: number
   customCar?: string
   overrideCarModelForCustomCar?: number
 }
-export type EntryListDriver = {
-  playerID: string
+export class EntryListDriver {
+  playerID: string = ''
   firstName?: string
   lastName?: string
   shortName?: string
   driverCategory?: DriverCategory
-}
-// Defaults
-export const EntryListDriverDefault: EntryListDriver = {
-  playerID: '',
 }
 //#endregion

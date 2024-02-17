@@ -14,48 +14,50 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
-import download from "downloadjs";
-import { cloneDeep } from "lodash-es";
-import { ref, watch } from "vue";
+import download from 'downloadjs'
+import { clone, cloneDeep } from 'lodash-es'
+import { ref, watch } from 'vue'
 
 const props = defineProps<{
-  fileName: string,
+  fileName: string
   default?: T
-}>();
+}>()
 
-const jsonError = ref<string>();
+const jsonError = ref<string>()
 
 //#region File parsing
-const file = defineModel<T>();
-const fileText = ref<string>();
+const file = defineModel<T>()
+const fileText = ref<string>()
 
-watch(file, (value) => {
-  try {
-    if (value !== undefined && value !== null)
-      fileText.value = JSON.stringify(value, null, 2);
-    else
-      fileText.value = undefined;
-  } catch (e: any) {
-    jsonError.value = e.message;
-  }
-}, { deep: true });
+watch(
+  file,
+  (value) => {
+    try {
+      if (value != undefined) {
+        fileText.value = JSON.stringify(value, null, 2)
+      } else fileText.value = undefined
+    } catch (e: any) {
+      jsonError.value = e.message
+    }
+  },
+  { deep: true },
+)
 watch(fileText, (newValue) => {
   try {
     if (newValue) file.value = JSON.parse(newValue)
-    else file.value = undefined;
+    else file.value = undefined
   } catch (e: any) {
-    jsonError.value = e.message;
+    jsonError.value = e.message
   }
 })
 //#endregion
 
 function onNew() {
-  file.value = cloneDeep(props.default);
+  file.value = cloneDeep(props.default)
 }
 
 function downloadFile() {
-  if (fileText.value)
-    download(fileText.value, `${props.fileName}.json`, "application/json");
+  if (fileText.value) download(fileText.value, `${props.fileName}.json`, 'application/json')
 }
 </script>
 
@@ -64,17 +66,12 @@ function downloadFile() {
     <b-alert variant="danger" :show="!!jsonError" class="mb-2">
       {{ jsonError }}
     </b-alert>
-    <BFormTextarea v-model="fileText" rows="10" class="mb-2"
-      :placeholder="`Drag & Drop your ${fileName}.json or paste its contents here...`" />
+    <BFormTextarea v-model="fileText" rows="10" class="mb-2" :placeholder="`Drag & Drop your ${fileName}.json or paste its contents here...`" />
     <div class="d-flex flex-row justify-content-center mb-1">
-      <b-button variant="secondary" @click="onNew">
-        New {{ fileName }}.json
-      </b-button>
+      <b-button variant="secondary" @click="onNew"> New {{ fileName }}.json </b-button>
     </div>
     <div v-if="!!file" class="d-flex flex-row justify-content-center mb-1">
-      <b-button variant="secondary" @click="downloadFile">
-        Download {{ fileName }}.json
-      </b-button>
+      <b-button variant="secondary" @click="downloadFile"> Download {{ fileName }}.json </b-button>
     </div>
   </div>
 </template>

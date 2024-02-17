@@ -15,7 +15,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import { Platform } from '@/stores/settings'
-import type { EntryListEntry } from './gameFiles'
 
 export function isNullOrWhitespace(input: string | null | undefined) {
   return !input || !input.trim()
@@ -52,8 +51,8 @@ export function randomString(length: number = 6) {
   for (let i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)]
   return result
 }
-export function parsePlayerId(playerId: string) {
-  let platform = Platform.Steam
+export function parsePlayerId(playerId: string, defaultPlatform: Platform = Platform.Steam) {
+  let platform = defaultPlatform
   if (playerId.startsWith('S')) platform = Platform.Steam
   else if (playerId.startsWith('M')) platform = Platform.Xbox
   else if (playerId.startsWith('P')) platform = Platform.PlayStation
