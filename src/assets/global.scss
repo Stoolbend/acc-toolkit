@@ -1,6 +1,5 @@
 body,
 div#app {
-  background-color: var(--bs-light);
   height: 100vh;
 
   /* Platform colour variables */
@@ -63,7 +62,7 @@ select.playstation {
 }
 /* #endregion */
 
-/* #region Badges */
+/* #region Platform branding */
 .platform-badge {
   border-radius: 8px;
   padding: 0.25em 0.5em;
@@ -79,5 +78,14 @@ select.playstation {
 .platform-badge.playstation {
   background-color: var(--platform-playstation-background);
   color: var(--platform-playstation-text);
+}
+.text-steam {
+  color: var(--platform-steam-background);
+}
+.text-xbox {
+  color: var(--platform-xbox-background);
+}
+.text-playstation {
+  color: var(--platform-playstation-background);
 }
 /* #endregion */

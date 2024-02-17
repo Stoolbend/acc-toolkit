@@ -15,12 +15,28 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { useColorMode } from 'bootstrap-vue-next'
 import { RouterView } from 'vue-router'
 import { ModalsContainer } from 'vue-final-modal'
+
+const colorMode = useColorMode()
+function toggleColorMode() {
+  switch (colorMode.value) {
+    case 'auto':
+      colorMode.value = 'dark'
+      break
+    case 'dark':
+      colorMode.value = 'light'
+      break
+    case 'light':
+      colorMode.value = 'auto'
+      break
+  }
+}
 </script>
 
 <template>
-  <b-navbar toggleable="lg" type="light" variant="light">
+  <b-navbar toggleable="lg">
     <b-navbar-brand :to="{ name: 'home' }">ACC Tooklit</b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -48,6 +64,10 @@ import { ModalsContainer } from 'vue-final-modal'
       </b-navbar-nav>
 
       <b-navbar-nav class="ms-auto">
+        <b-nav-item v-b-tooltip.hover.bottom="'Toggle dark mode'" @click="toggleColorMode">
+          <i v-if="colorMode === 'auto'" class="bi bi-brightness-alt-high-fill" />
+          <i v-else class="bi bi-sun-fill" />
+        </b-nav-item>
         <b-nav-item href="https://github.com/Stoolbend/acc-toolkit" target="_blank">
           <div class="d-flex flex-row align-items-center">
             View on GitHub
@@ -64,7 +84,7 @@ import { ModalsContainer } from 'vue-final-modal'
     </b-collapse>
   </b-navbar>
   <RouterView />
-  <footer class="bg-light">
+  <footer>
     <a class="text-sm" href="https://github.com/Stoolbend/acc-toolkit/blob/master/LICENSE" target="_blank"> License </a>
     <div class="d-flex flex-row align-items-center">
       Made with ❤ by
