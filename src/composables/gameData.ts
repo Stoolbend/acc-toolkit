@@ -15,11 +15,12 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import { Cars, CupCategories, DriverCategories, SessionTypes } from '@/lib/gameData'
+import type { SelectOption } from 'bootstrap-vue-next'
 
 export function useGameData() {
   //#region Session types
   function sessionTypeOptions() {
-    const result = []
+    const result = [] as SelectOption[]
     for (const item of SessionTypes) {
       result.push({
         text: item.name,
@@ -32,7 +33,7 @@ export function useGameData() {
 
   //#region Cup categories
   function cupCategoryOptions() {
-    const result = []
+    const result = [] as SelectOption[]
     for (const item of CupCategories) {
       result.push({
         text: item.name,
@@ -45,10 +46,30 @@ export function useGameData() {
 
   //#region Driver categories
   function driverCategoryOptions() {
-    const result = []
+    const result = [
+      {
+        text: 'No category',
+        value: '',
+      },
+    ] as SelectOption[]
     for (const item of DriverCategories) {
       result.push({
         text: item.name,
+        value: item.value,
+      })
+    }
+    return result
+  }
+  function driverCategoryOptionsShort() {
+    const result = [
+      {
+        text: '-',
+        value: '',
+      },
+    ] as SelectOption[]
+    for (const item of DriverCategories) {
+      result.push({
+        text: item.short,
         value: item.value,
       })
     }
@@ -63,7 +84,7 @@ export function useGameData() {
         text: 'Any car',
         value: -1,
       },
-    ]
+    ] as SelectOption[]
     for (const item of Cars) {
       result.push({
         text: item.name,
@@ -77,5 +98,5 @@ export function useGameData() {
   //#region Tracks
   //#endregion Tracks
 
-  return { sessionTypeOptions, cupCategoryOptions, driverCategoryOptions, carOptions }
+  return { sessionTypeOptions, cupCategoryOptions, driverCategoryOptions, driverCategoryOptionsShort, carOptions }
 }

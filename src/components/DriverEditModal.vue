@@ -81,7 +81,7 @@ function submit(event: Event) {
 
 <template>
   <VueFinalModal
-    id="driver-modal"
+    id="driver-edit-modal"
     class="d-flex justify-content-center align-items-center modal"
     content-class="modal-dialog"
     content-transition="vfm-fade"

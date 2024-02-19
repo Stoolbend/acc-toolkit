@@ -15,6 +15,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import DriverSelectModal from '@/components/DriverSelectModal.vue'
 import EntryOptionToggle from '@/components/EntryOptionToggle.vue'
 import FilePicker from '@/components/FilePicker.vue'
 import { useGameData } from '@/composables/gameData'
@@ -24,6 +25,7 @@ import { useDriverStore } from '@/stores/drivers'
 import { Platform, PlatformOptions } from '@/stores/settings'
 import { orderBy } from 'lodash-es'
 import { computed, ref, watch, watchEffect } from 'vue'
+import { useModal } from 'vue-final-modal'
 
 const data = ref<EntryList>()
 const driverStore = useDriverStore()
@@ -57,7 +59,21 @@ function sortEntries() {
 function addBlankDriver(entry: EntryListEntry) {
   entry.drivers.push(new EntryListDriver())
 }
-function addSavedDriver(entry: EntryListEntry) {}
+function addSavedDriver(entry: EntryListEntry) {
+  const { close } = useModal({
+    defaultModelValue: true,
+    component: DriverSelectModal,
+    attrs: {
+      onSelect(driver: EntryListDriver) {
+        entry.drivers.push(driver)
+        close()
+      },
+      onClose() {
+        close()
+      },
+    },
+  })
+}
 function makeFirstDriver(entry: EntryListEntry, driver: EntryListDriver) {
   const index = entry.drivers.indexOf(driver)
   if (index === 0) return
@@ -114,7 +130,7 @@ function deleteDriver(entry: EntryListEntry, driver: EntryListDriver) {
               </div>
               <div class="d-flex flex-row justify-content-center gap-2">
                 <b-button variant="outline-success" size="sm" @click="addBlankDriver(entry)"><i class="bi bi-plus me-1" />Add blank</b-button>
-                <b-button disabled variant="outline-success" size="sm" @click="addSavedDriver(entry)"><i class="bi bi-person-arms-up me-1" />Add saved</b-button>
+                <b-button variant="outline-success" size="sm" @click="addSavedDriver(entry)"><i class="bi bi-person-arms-up me-1" />Add saved</b-button>
               </div>
             </div>
             <div class="options col-12 col-md-5">
@@ -204,9 +220,9 @@ function deleteDriver(entry: EntryListEntry, driver: EntryListDriver) {
     }
 
     .options {
-        display: flex;
-        flex-direction: column;
-        gap: 0.25em;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25em;
     }
   }
 }
