@@ -15,21 +15,17 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import DriverSelectModal from '@/components/DriverSelectModal.vue'
-import EntryOptionToggle from '@/components/EntryOptionToggle.vue'
+import EntryListItem from '@/components/EntryListItem.vue'
 import FilePicker from '@/components/FilePicker.vue'
 import { useGameData } from '@/composables/gameData'
-import { EntryList, EntryListDriver, EntryListEntry } from '@/lib/gameFiles'
+import { EntryList, EntryListEntry } from '@/lib/gameFiles'
 import { getNextAvailableCarNumber, getPlatformClass } from '@/lib/utils'
 import { useDriverStore } from '@/stores/drivers'
 import { Platform, PlatformOptions } from '@/stores/settings'
-import { orderBy } from 'lodash-es'
 import { computed, ref, watch, watchEffect } from 'vue'
-import { useModal } from 'vue-final-modal'
 
 const data = ref<EntryList>()
 const driverStore = useDriverStore()
-const gameData = useGameData()
 
 //#region Default platform
 const defaultPlatform = ref<Platform>(driverStore.defaultPlatform)
@@ -42,53 +38,17 @@ watch(defaultPlatform, (value) => {
 })
 //#endregion
 
-//#region Entry management
 function addEntry() {
   if (!data.value) return
   let entry = new EntryListEntry()
   entry.raceNumber = getNextAvailableCarNumber(data.value.entries)
   data.value.entries.push(entry)
 }
-function sortEntries() {
+function deleteEntry(entry: EntryListEntry) {
   if (!data.value) return
-  data.value.entries = orderBy(data.value.entries, ['raceNumber'])
+  const index = data.value.entries.indexOf(entry)
+  data.value.entries.splice(index, 1)
 }
-//#endregion
-
-//#region Driver management
-function addBlankDriver(entry: EntryListEntry) {
-  entry.drivers.push(new EntryListDriver())
-}
-function addSavedDriver(entry: EntryListEntry) {
-  const { close } = useModal({
-    defaultModelValue: true,
-    component: DriverSelectModal,
-    attrs: {
-      onSelect(driver: EntryListDriver) {
-        entry.drivers.push(driver)
-        close()
-      },
-      onClose() {
-        close()
-      },
-    },
-  })
-}
-function makeFirstDriver(entry: EntryListEntry, driver: EntryListDriver) {
-  const index = entry.drivers.indexOf(driver)
-  if (index === 0) return
-  entry.drivers.splice(index, 1)
-  entry.drivers.unshift(driver)
-}
-function deleteDriver(entry: EntryListEntry, driver: EntryListDriver) {
-  const index = entry.drivers.indexOf(driver)
-  entry.drivers.splice(index, 1)
-}
-//#endregion
-
-//#region Cars
-
-//#endregion
 </script>
 
 <template>
@@ -107,72 +67,7 @@ function deleteDriver(entry: EntryListEntry, driver: EntryListDriver) {
           <b-button variant="success" @click="addEntry"><i class="bi bi-plus me-1" />Add car</b-button>
         </div>
         <div class="entries">
-          <div v-for="(entry, i) in data.entries" class="entry row">
-            <div class="col-12 col-md-1">
-              <div class="car-number">
-                <div>Car</div>
-                <b-form-input v-model="entry.raceNumber" size="lg" />
-              </div>
-              <div class="grid-position">
-                <div>Grid</div>
-                <b-form-input v-model="entry.defaultGridPosition" size="lg" />
-              </div>
-            </div>
-            <div class="drivers col-12 col-md-6">
-              <div v-for="(driver, i) in entry.drivers" :key="driver.playerID" class="driver">
-                <DriverEntryInlineForm v-model="entry.drivers[i]" />
-                <div class="driver-controls">
-                  <b-button variant="secondary" size="sm" :disabled="i === 0" v-b-tooltip.hover.left="'Set as lead driver'" @click="makeFirstDriver(entry, driver)">
-                    <i class="bi bi-award-fill" />
-                  </b-button>
-                  <b-button variant="danger" size="sm" @click="deleteDriver(entry, driver)"><i class="bi bi-trash-fill" /></b-button>
-                </div>
-              </div>
-              <div class="d-flex flex-row justify-content-center gap-2">
-                <b-button variant="outline-success" size="sm" @click="addBlankDriver(entry)"><i class="bi bi-plus me-1" />Add blank</b-button>
-                <b-button variant="outline-success" size="sm" @click="addSavedDriver(entry)"><i class="bi bi-person-arms-up me-1" />Add saved</b-button>
-              </div>
-            </div>
-            <div class="options col-12 col-md-5">
-              <div class="d-flex flex-row gap-1 justify-content-between">
-                <EntryOptionToggle v-model="entry.overrideDriverInfo">Override driver info</EntryOptionToggle>
-                <EntryOptionToggle v-model="entry.overrideCarModelForCustomCar">Override custom car model</EntryOptionToggle>
-                <EntryOptionToggle v-model="entry.isServerAdmin">Server admin</EntryOptionToggle>
-              </div>
-              <b-input-group size="sm">
-                <template #prepend>
-                  <b-input-group-text>Car</b-input-group-text>
-                </template>
-                <b-form-select v-model="entry.forcedCarModel" :options="gameData.carOptions()" size="sm" />
-              </b-input-group>
-              <div class="d-flex flex-row gap-1">
-                <b-input-group size="sm">
-                  <template #prepend>
-                    <b-input-group-text>Ballast</b-input-group-text>
-                  </template>
-                  <b-form-input v-model="entry.ballastKg" type="number" min="0" max="100" size="sm" />
-                  <template #append>
-                    <b-input-group-text>kg</b-input-group-text>
-                  </template>
-                </b-input-group>
-                <b-input-group size="sm">
-                  <template #prepend>
-                    <b-input-group-text>Restrictor</b-input-group-text>
-                  </template>
-                  <b-form-input v-model="entry.ballastKg" type="number" min="0" max="20" size="sm" />
-                  <template #append>
-                    <b-input-group-text>%</b-input-group-text>
-                  </template>
-                </b-input-group>
-              </div>
-              <b-input-group size="sm">
-                <template #prepend>
-                  <b-input-group-text>Custom livery</b-input-group-text>
-                </template>
-                <b-form-input v-model="entry.customCar" type="text" placeholder="exampleCar.json" size="sm" />
-              </b-input-group>
-            </div>
-          </div>
+          <EntryListItem v-for="(entry, i) in data.entries" :key="entry.raceNumber" :entry="entry" @delete="deleteEntry" />
         </div>
       </template>
       <hr />
@@ -194,36 +89,5 @@ function deleteDriver(entry: EntryListEntry, driver: EntryListDriver) {
   display: flex;
   flex-direction: column;
   gap: 1em;
-
-  .entry {
-    background-color: rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
-    padding: 0.5em 0;
-
-    .drivers {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5em;
-
-      .driver {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        gap: 0.25em;
-        .driver-controls {
-          display: flex;
-          flex-direction: row;
-          gap: 0.15em;
-        }
-      }
-    }
-
-    .options {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25em;
-    }
-  }
 }
 </style>
