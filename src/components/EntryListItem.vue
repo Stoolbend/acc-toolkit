@@ -67,10 +67,9 @@ enum AlertSeverity {
   None,
   Info,
   Warning,
-  Critical
+  Critical,
 }
-const border = computed(() => {
-})
+const border = computed(() => {})
 //#endregion
 </script>
 
@@ -152,6 +151,33 @@ const border = computed(() => {
   border: var(--bs-border-width) solid var(--bs-border-color);
   border-radius: 12px;
   padding: 0.5em 0;
+  margin: 0;
+
+  input.big-input {
+    text-align: center;
+  }
+  .car-number {
+    div {
+      padding-bottom: 0.25em;
+    }
+    input {
+      background-color: white;
+      color: black;
+    }
+  }
+  .grid-position {
+    div {
+      padding-bottom: 0.25em;
+    }
+    input {
+      background-color: #ffff66;
+      color: black;
+    }
+    input:placeholder-shown {
+      background-color: var(--bs-body-bg);
+      color: var(--bs-body-color);
+    }
+  }
 
   .drivers {
     display: flex;
