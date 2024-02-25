@@ -22,10 +22,16 @@ import { EntryList, EntryListEntry } from '@/lib/gameFiles'
 import { getNextAvailableCarNumber, getPlatformClass } from '@/lib/utils'
 import { useDriverStore } from '@/stores/drivers'
 import { Platform, PlatformOptions } from '@/stores/settings'
+import { cloneDeep } from 'lodash-es'
 import { computed, ref, watch, watchEffect } from 'vue'
 
 const data = ref<EntryList>()
 const driverStore = useDriverStore()
+
+const raceNumbers = computed(() => {
+  if (!data.value) return []
+  return data.value.entries.map((e) => e.raceNumber)
+})
 
 //#region Default platform
 const defaultPlatform = ref<Platform>(driverStore.defaultPlatform)
@@ -67,7 +73,7 @@ function deleteEntry(entry: EntryListEntry) {
           <b-button variant="success" @click="addEntry"><i class="bi bi-plus me-1" />Add car</b-button>
         </div>
         <div class="entries">
-          <EntryListItem v-for="(entry, i) in data.entries" :key="entry.raceNumber" :entry="entry" @delete="deleteEntry" />
+          <EntryListItem v-for="(entry, i) in data.entries" :key="entry.raceNumber" :entry="entry" :race-numbers="raceNumbers" @delete="deleteEntry" />
         </div>
       </template>
       <hr />

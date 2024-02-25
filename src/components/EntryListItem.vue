@@ -19,11 +19,13 @@ import DriverSelectModal from '@/components/DriverSelectModal.vue'
 import EntryOptionToggle from '@/components/EntryOptionToggle.vue'
 import { useGameData } from '@/composables/gameData'
 import { EntryListDriver, EntryListEntry } from '@/lib/gameFiles'
+import { onMounted } from 'vue'
 import { computed, ref, watch, watchEffect } from 'vue'
 import { useModal } from 'vue-final-modal'
 
 const props = defineProps<{
   entry: EntryListEntry
+  raceNumbers: number[]
 }>()
 const emit = defineEmits<{
   (e: 'updated', value: EntryListEntry): void
@@ -62,14 +64,77 @@ function deleteDriver(entry: EntryListEntry, driver: EntryListDriver) {
 }
 //#endregion
 
-//#region Warnings & indicators
+//#region Car number processing
+const raceNumber = ref<string>('')
+//TODO Fix a bug here where emptying the car number sets the field to null, and the entry disappears.
+onMounted(() => {
+  if (props.entry.raceNumber == null || props.entry.raceNumber < 0 || props.entry.raceNumber > 999) {
+    props.entry.raceNumber = 1
+    raceNumber.value = (1).toString()
+  } else raceNumber.value = props.entry.raceNumber.toString()
+})
+watch(raceNumber, (value) => {
+  const parsedNumber = Number.parseInt(value)
+  if (parsedNumber == null || parsedNumber < 0 || parsedNumber > 999) {
+    props.entry.raceNumber = 1
+    raceNumber.value = (1).toString()
+  } else props.entry.raceNumber = Number.parseInt(value)
+})
+//#endregion
+
+//#region Warnings, indicators & validation
 enum AlertSeverity {
   None,
   Info,
   Warning,
   Critical,
 }
-const border = computed(() => {})
+const alertLevel = ref<AlertSeverity>(AlertSeverity.None)
+const alertMessage = ref<string>()
+const border = computed(() => {
+  switch (alertLevel.value) {
+    case AlertSeverity.Info:
+      return 'alert-info'
+    case AlertSeverity.Warning:
+      return 'alert-warning'
+    case AlertSeverity.Critical:
+      return 'alert-danger'
+    default:
+      return ''
+  }
+})
+function validateRaceNumber() {
+  const parsedNumber = Number.parseInt(props.entry.raceNumber.toString())
+  // Check it's a valid integer
+  if (Number.isNaN(parsedNumber)) {
+    alertMessage.value = 'Car number must be set'
+    return false
+  }
+  // Check it's not a duplicate of another car
+  if (props.raceNumbers.filter((n) => n === parsedNumber).length > 1) {
+    alertMessage.value = 'Car number is not unique'
+    return false
+  }
+  return true
+}
+// Check properties and display warnings
+watchEffect(() => {
+  // Critical problems
+  if (!validateRaceNumber()) {
+    alertLevel.value = AlertSeverity.Critical
+    return
+  }
+  // Warning problems
+  // Informational messages
+  if (props.entry.drivers.length < 1) {
+    alertLevel.value = AlertSeverity.Info
+    alertMessage.value = 'Car has no drivers'
+    return
+  }
+  // Clear the alerts if nothing is wrong
+  alertLevel.value = AlertSeverity.None
+  alertMessage.value = undefined
+})
 //#endregion
 </script>
 
@@ -78,14 +143,17 @@ const border = computed(() => {})
     <div class="col-12 col-md-1 d-flex flex-column text-center gap-1">
       <div class="car-number">
         <div>Car</div>
-        <b-form-input v-model="entry.raceNumber" class="big-input" size="lg" />
+        <b-form-input v-model="raceNumber" type="number" min="0" max="999" step="1" class="big-input" size="lg" required placeholder="-" />
       </div>
       <div class="grid-position">
         <div>Grid pos.</div>
-        <b-form-input v-model="entry.defaultGridPosition" class="big-input" size="lg" placeholder="-" />
+        <b-form-input v-model="entry.defaultGridPosition" type="number" min="0" max="99" step="1" class="big-input" size="lg" placeholder="-" />
       </div>
     </div>
     <div class="drivers col-12 col-md-6">
+      <div v-if="alertMessage" class="alert py-1 m-0" :class="border" role="alert">
+        {{ alertMessage }}
+      </div>
       <div v-for="(driver, i) in entry.drivers" :key="driver.playerID" class="driver">
         <DriverEntryInlineForm v-model="entry.drivers[i]" />
         <div class="driver-controls">
