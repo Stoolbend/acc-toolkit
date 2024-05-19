@@ -140,7 +140,7 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div class="entry row" :class="border">
+  <div class="entry row gap-3 gap-xl-0" :class="border">
     <div class="col-12 col-xl-1 d-flex flex-column text-center gap-1">
       <div class="car-number">
         <div>Car</div>
