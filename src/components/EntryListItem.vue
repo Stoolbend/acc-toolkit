@@ -15,6 +15,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import DriverEntryInlineForm from '@/components/DriverEntryInlineForm.vue'
 import DriverSelectModal from '@/components/DriverSelectModal.vue'
 import EntryOptionToggle from '@/components/EntryOptionToggle.vue'
 import { useGameData } from '@/composables/gameData'
@@ -140,7 +141,7 @@ watchEffect(() => {
 
 <template>
   <div class="entry row" :class="border">
-    <div class="col-12 col-md-1 d-flex flex-column text-center gap-1">
+    <div class="col-12 col-xl-1 d-flex flex-column text-center gap-1">
       <div class="car-number">
         <div>Car</div>
         <b-form-input v-model="raceNumber" type="number" min="0" max="999" step="1" class="big-input" size="lg" required placeholder="-" />
@@ -150,7 +151,7 @@ watchEffect(() => {
         <b-form-input v-model="entry.defaultGridPosition" type="number" min="0" max="99" step="1" class="big-input" size="lg" placeholder="-" />
       </div>
     </div>
-    <div class="drivers col-12 col-md-6">
+    <div class="drivers col-12 col-xl-6">
       <div v-if="alertMessage" class="alert py-1 m-0" :class="border" role="alert">
         {{ alertMessage }}
       </div>
@@ -168,7 +169,7 @@ watchEffect(() => {
         <b-button variant="outline-success" size="sm" @click="addSavedDriver(entry)"><i class="bi bi-person-arms-up me-1" />Add saved</b-button>
       </div>
     </div>
-    <div class="options col-12 col-md-5">
+    <div class="options col-12 col-xl-5">
       <div class="d-flex flex-row gap-1 justify-content-between">
         <EntryOptionToggle v-model="entry.overrideDriverInfo">Override driver info</EntryOptionToggle>
         <EntryOptionToggle v-model="entry.overrideCarModelForCustomCar">Override custom car model</EntryOptionToggle>

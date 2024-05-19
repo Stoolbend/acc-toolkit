@@ -18,6 +18,7 @@ const playerIdForm = reactive({
   platform: cloneDeep(driverStore.defaultPlatform),
 })
 function onPlayerIdUpdated() {
+  console.debug(`DEIF - onPlayerIdUpdated (${playerIdForm.id})`);
   if (!driver.value) return
   driver.value.playerID = formatPlayerId(playerIdForm.id, playerIdForm.platform)
 }
@@ -25,6 +26,7 @@ function onPlayerIdUpdated() {
 
 watchEffect(() => {
   if (driver.value) {
+    console.debug("DEIF - watchEffect");
     // Remove blank properties
     if (driver.value.firstName == '') delete driver.value.firstName
     if (driver.value.lastName == '') delete driver.value.lastName
@@ -55,7 +57,7 @@ onMounted(() => {
             @update:model-value="onPlayerIdUpdated"
           />
         </template>
-        <b-form-input v-model="playerIdForm.id" type="text" id="id" required size="sm" placeholder="Player ID" @update:model-value="onPlayerIdUpdated" />
+        <b-form-input v-model="playerIdForm.id" type="text" id="id" required size="sm" placeholder="Player ID" @blur="onPlayerIdUpdated" />
       </b-input-group>
     </div>
     <div class="col-6">
