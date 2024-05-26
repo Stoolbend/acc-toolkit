@@ -81,6 +81,34 @@ function onForceOverrideCarModelClicked() {
   }
 }
 //#endregion
+//#region Reverse grid
+function reverseGrid() {
+  //TODO Maybe add a confirm modal in here at some point?
+  if (!data.value) return
+  const result = data.value.entries.sort(
+    (a, b) =>
+      (a.defaultGridPosition === undefined ? Number.MIN_SAFE_INTEGER : a.defaultGridPosition) -
+      (b.defaultGridPosition === undefined ? Number.MIN_SAFE_INTEGER : b.defaultGridPosition),
+  )
+
+  let entries = data.value.entries
+  let gridPositions: Array<number | undefined> = []
+  entries.forEach((entry) => gridPositions.push(entry.defaultGridPosition))
+  entries.sort(function (a: any, b: any) {
+    return b.defaultGridPosition - a.defaultGridPosition
+  })
+
+  gridPositions.sort(function (a: any, b: any) {
+    return a - b
+  })
+
+  entries.forEach((entry, index) => {
+    entry.defaultGridPosition = gridPositions[index]
+  })
+
+  data.value.entries = entries
+}
+//#endregion
 </script>
 
 <template>
@@ -102,10 +130,11 @@ function onForceOverrideCarModelClicked() {
           <EntryListItem v-for="(entry, i) in data.entries" :key="entry.raceNumber" :entry="entry" :race-numbers="raceNumbers" @delete="deleteEntry" />
         </div>
         <div class="controls mt-3">
-          <b-form-checkbox v-model="data.forceEntryList" button button-variant="outline-info" :value="1" :unchecked-value="0">
-            Reject drivers not on entry list
-          </b-form-checkbox>
+          <b-button variant="outline-warning" @click="reverseGrid">Reverse grid</b-button>
           <div class="d-flex flex-row gap-2">
+            <b-form-checkbox v-model="data.forceEntryList" button button-variant="outline-info" :value="1" :unchecked-value="0">
+              Reject drivers not on entry list
+            </b-form-checkbox>
             <b-button :variant="getToggleVariant('info', forceOverrideDriverInfo)" @click="onForceOverrideDriverInfoClicked">Override all driver info</b-button>
             <b-button :variant="getToggleVariant('info', forceOverrideCarModel)" @click="onForceOverrideCarModelClicked">Override all car models</b-button>
           </div>
