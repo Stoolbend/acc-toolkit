@@ -17,12 +17,10 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import EntryListItem from '@/components/EntryListItem.vue'
 import FilePicker from '@/components/FilePicker.vue'
-import { useGameData } from '@/composables/gameData'
 import { EntryList, EntryListEntry } from '@/lib/gameFiles'
 import { getNextAvailableCarNumber, getPlatformClass } from '@/lib/utils'
 import { useDriverStore } from '@/stores/drivers'
 import { Platform, PlatformOptions } from '@/stores/settings'
-import { cloneDeep } from 'lodash-es'
 import { computed, ref, watch, watchEffect } from 'vue'
 
 const data = ref<EntryList>()
@@ -48,6 +46,8 @@ function addEntry() {
   if (!data.value) return
   let entry = new EntryListEntry()
   entry.raceNumber = getNextAvailableCarNumber(data.value.entries)
+  if (forceOverrideDriverInfo.value) entry.overrideDriverInfo = 1
+  if (forceOverrideCarModel.value) entry.overrideCarModelForCustomCar = 1
   data.value.entries.push(entry)
 }
 function deleteEntry(entry: EntryListEntry) {
@@ -55,6 +55,32 @@ function deleteEntry(entry: EntryListEntry) {
   const index = data.value.entries.indexOf(entry)
   data.value.entries.splice(index, 1)
 }
+function getToggleVariant(variant: string, value: boolean): any {
+  return value ? variant : `outline-${variant}`
+}
+
+//#region Force toggles: override driver info
+const forceOverrideDriverInfo = ref(false)
+function onForceOverrideDriverInfoClicked() {
+  forceOverrideDriverInfo.value = !forceOverrideDriverInfo.value
+  if (data.value) {
+    data.value.entries.forEach((entry) => {
+      entry.overrideDriverInfo = forceOverrideDriverInfo.value ? 1 : 0
+    })
+  }
+}
+//#endregion
+//#region Force toggles: override car model
+const forceOverrideCarModel = ref(false)
+function onForceOverrideCarModelClicked() {
+  forceOverrideCarModel.value = !forceOverrideCarModel.value
+  if (data.value) {
+    data.value.entries.forEach((entry) => {
+      entry.overrideCarModelForCustomCar = forceOverrideCarModel.value ? 1 : 0
+    })
+  }
+}
+//#endregion
 </script>
 
 <template>
@@ -74,6 +100,15 @@ function deleteEntry(entry: EntryListEntry) {
         </div>
         <div class="entries">
           <EntryListItem v-for="(entry, i) in data.entries" :key="entry.raceNumber" :entry="entry" :race-numbers="raceNumbers" @delete="deleteEntry" />
+        </div>
+        <div class="controls mt-3">
+          <b-form-checkbox v-model="data.forceEntryList" button button-variant="outline-info" :value="1" :unchecked-value="0">
+            Reject drivers not on entry list
+          </b-form-checkbox>
+          <div class="d-flex flex-row gap-2">
+            <b-button :variant="getToggleVariant('info', forceOverrideDriverInfo)" @click="onForceOverrideDriverInfoClicked">Override all driver info</b-button>
+            <b-button :variant="getToggleVariant('info', forceOverrideCarModel)" @click="onForceOverrideCarModelClicked">Override all car models</b-button>
+          </div>
         </div>
       </template>
       <hr />
