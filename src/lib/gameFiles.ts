@@ -40,7 +40,7 @@ export class Settings {
   adminPassword: string = 'letmeadmin'
   password: string = ''
   spectatorPassword: string = ''
-  carGroup: SettingsCarGroup = SettingsCarGroup.FreeForAll
+  carGroup: string = SettingsCarGroup.FreeForAll
   trackMedalsRequirement: number = 3
   safetyRatingRequirement: number = 49
   racecraftRatingRequirement: number = -1
@@ -48,7 +48,7 @@ export class Settings {
   allowAutoDQ: 0 | 1 = 1
   isRaceLocked: 0 | 1 = 0
   shortFormationLap: 0 | 1 = 0
-  formationLapType: SettingsFormationLapType = SettingsFormationLapType.Default
+  formationLapType: number = SettingsFormationLapType.Default
   randomizeTrackWhenEmpty: 0 | 1 = 0
   centralEntryListPath: string = ''
   ignorePrematureDisconnects: 0 | 1 = 1
@@ -79,6 +79,6 @@ export class EntryListDriver {
   firstName?: string
   lastName?: string
   shortName?: string
-  driverCategory?: DriverCategory
+  driverCategory?: number
 }
 //#endregion

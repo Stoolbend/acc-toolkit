@@ -45,12 +45,12 @@ export type CupCategoryOption = {
     border: string
   }
 } & BasicType<number>
-export enum CupCategory {
-  Overall = 0,
-  ProAm = 1,
-  Am = 2,
-  Silver = 3,
-  National = 4,
+export const CupCategory = {
+  Overall: 0,
+  ProAm: 1,
+  Am: 2,
+  Silver: 3,
+  National: 4,
 }
 export const CupCategories = [
   {
@@ -107,15 +107,15 @@ export const CupCategories = [
 //#endregion Cup categories
 
 //#region Driver categories
-export enum DriverCategory {
-  Bronze = 0,
-  Silver = 1,
-  Gold = 2,
-  Platinum = 3,
+export const DriverCategory = {
+  Bronze: 0,
+  Silver: 1,
+  Gold: 2,
+  Platinum: 3,
 }
 export type DriverCategoryOption = {
   short: string
-} & BasicType<DriverCategory>
+} & BasicType<number>
 export const DriverCategories = [
   {
     name: 'Bronze',
@@ -626,17 +626,17 @@ export const Tracks = [
 //#endregion Tracks
 
 //#region Settings
-export enum SettingsCarGroup {
-  FreeForAll = 'FreeForAll',
-  GT3 = 'GT3',
-  GT4 = 'GT4',
-  GTC = 'GTC',
+export const SettingsCarGroup = {
+  FreeForAll: 'FreeForAll',
+  GT3: 'GT3',
+  GT4: 'GT4',
+  GTC: 'GTC',
 }
-export enum SettingsFormationLapType {
-  Free = 0,
-  OldLimiterLap = 1,
-  Default = 3,
-  OneLap = 4,
-  Short = 5,
+export const SettingsFormationLapType = {
+  Free: 0,
+  OldLimiterLap: 1,
+  Default: 3,
+  OneLap: 4,
+  Short: 5,
 }
 //#endregion
